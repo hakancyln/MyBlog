@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MyBlog.Entity.Entity
 {
-	public class About: BaseEntity
+	public class About : BaseEntity
 	{
         public string NameSurname { get; set; }
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Job { get; set; }
         public string Mail { get; set; }
         public string Description { get; set; }

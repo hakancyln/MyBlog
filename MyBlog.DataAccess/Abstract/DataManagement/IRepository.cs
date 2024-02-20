@@ -15,6 +15,6 @@ namespace MyBlog.DataAccess.Abstract.DataManagement
 		Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> Filter = null, params string[] IncludeProperties);
 		Task<EntityEntry<T>> AddAsync(T p);
 		Task UpdateAsync(T p);
-		Task RemoveAsync(T p);
+		Task RemoveAsync(int id);
 	}
 }

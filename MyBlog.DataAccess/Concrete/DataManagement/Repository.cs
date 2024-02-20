@@ -64,9 +64,10 @@ namespace MyBlog.DataAccess.Concrete.DataManagement
 			return await query.SingleOrDefaultAsync(Filter);
 		}
 
-		public async Task RemoveAsync(T Entity)
+		public async Task RemoveAsync(int Entity)
 		{
-			await Task.Run(() => _dbSet.Remove(Entity));
+			var a=await _dbSet.FindAsync(Entity);
+			await Task.Run(() => _dbSet.Remove(a));
 		}
 
 		public async Task UpdateAsync(T Entity)

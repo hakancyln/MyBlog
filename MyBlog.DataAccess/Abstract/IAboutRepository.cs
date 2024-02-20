@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyBlog.DataAccess.Abstract
 {
-	public interface IAboutRepository: IRepository<About>
+	public interface IAboutRepository : IRepository<About>
 	{
 	}
 }
