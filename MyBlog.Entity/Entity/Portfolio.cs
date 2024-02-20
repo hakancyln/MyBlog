@@ -11,6 +11,6 @@ namespace MyBlog.Entity.Entity
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public IEnumerable<Images> Image { get; set; }
+        public ICollection<Images> Images { get; set; }
     }
 }

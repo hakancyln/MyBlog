@@ -1,4 +1,5 @@
-﻿using MyBlog.Entity.Entity;
+﻿using MyBlog.Entity.DTO.ImageDTO;
+using MyBlog.Entity.Entity;
 
 namespace MyBlog.Entity.DTO.PortfolioDTO
 {
@@ -8,6 +9,6 @@ namespace MyBlog.Entity.DTO.PortfolioDTO
 		public string Name { get; set; }
 		public string Description { get; set; }
 
-		public IEnumerable<Images> Images { get; set; }
+		public IEnumerable<ImageCrudDTO> Images { get; set; }
 	}
 }

@@ -34,7 +34,7 @@ namespace MyBlog.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddOrUpdate(UserCrudDTO about)
 		{
-			//about.Id = 1;
+			about.Id = 1;
 			ApiResponse<bool> value;
 			if (about.Id == 0)
 			{
