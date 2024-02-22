@@ -16,6 +16,11 @@ namespace MyBlog.Business.Mapper
         {
 			CreateMap<User, UserGetDTO>().ReverseMap();
 			CreateMap<User, UserCrudDTO>().ReverseMap();
+
+			CreateMap<User, LoginGetDTO>().ReverseMap();
+			CreateMap<User, LoginCrudDTO>().ReverseMap();
+
+			
 		}
     }
 }

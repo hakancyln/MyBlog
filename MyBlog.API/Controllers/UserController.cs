@@ -32,16 +32,22 @@ namespace MyBlog.API.Controllers
 			return Ok(value);
 		}
 		[HttpPost]
-		public async Task<IActionResult> AddOrUpdate(UserCrudDTO about)
+		public async Task<IActionResult> Login(LoginCrudDTO data)
+		{			
+			var value = await _service.LoginAsync(data);
+			return Ok(value);
+		}
+		[HttpPost]
+		public async Task<IActionResult> AddOrUpdate(UserCrudDTO data)
 		{
-			about.Id = 1;
+			data.Id = 1;
 			ApiResponse<bool> value;
-			if (about.Id == 0)
+			if (data.Id == 0)
 			{
-				value = await _service.AddAsync(about);
+				value = await _service.AddAsync(data);
 				return Ok(value);
 			}
-			value = await _service.UpdateAsync(about);
+			value = await _service.UpdateUserAsync(data);
 			return Ok(value);
 		}
 		//[HttpPost]
