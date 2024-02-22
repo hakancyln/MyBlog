@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
-using MyBlog.Entity.DTO.ContactDTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MyBlog.Entity.DTO.AboutDTO;
 
 namespace MyBlog.Business.ValidationRules
 {

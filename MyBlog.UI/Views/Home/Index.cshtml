@@ -13,13 +13,10 @@
 
 <body id="top">
 
-	@await Html.PartialAsync("Intro")
-	@await Html.PartialAsync("About")
-@* 	@await Html.PartialAsync("Resume")
- *@	@await Html.PartialAsync("Portfolio")
-	@await Html.PartialAsync("Service")
+	@await Component.InvokeAsync("Intro")
+	@await Component.InvokeAsync("About")
+	@await Component.InvokeAsync("Portfolio")
 	@await Html.PartialAsync("Contact")
-	@await Html.PartialAsync("Footer")
 
 	<!-- about section
 	================================================== -->

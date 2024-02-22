@@ -21,7 +21,7 @@ namespace MyBlog.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> GetAll()
 		{
-			var value = await _service.GetAllAsync();
+			var value = await _service.GetAllAsync(x=>x.Name != null,"Images");
 			return Ok(value);
 		}
 		[HttpPost]
@@ -29,7 +29,7 @@ namespace MyBlog.API.Controllers
 		{
 			var deneme = new PortfolioGetDTO();
 			deneme.Id = id;
-			var value = await _service.GetAsync(id, x => true);
+			var value = await _service.GetAsync(id, x => true,"Images");
 			return Ok(value);
 		}
 		[HttpPost]

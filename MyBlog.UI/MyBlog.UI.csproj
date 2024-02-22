@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyBlog.Business\MyBlog.Business.csproj" />
+    <ProjectReference Include="..\MyBlog.DataAccess\MyBlog.DataAccess.csproj" />
+    <ProjectReference Include="..\MyBlog.Entity\MyBlog.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

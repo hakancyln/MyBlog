@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MyBlog.Business.Abstract;
+using MyBlog.Entity.DTO.AboutDTO;
 using MyBlog.Entity.DTO.ContactDTO;
-using MyBlog.Entity.Entity;
 using MyBlog.Entity.Result;
 
 namespace MyBlog.API.Controllers
@@ -24,12 +23,21 @@ namespace MyBlog.API.Controllers
 			var value = await _service.GetAllAsync();
 			return Ok(value);
 		}
-		[HttpPost]
+		//[HttpPost("{id}")]
+		//public async Task<IActionResult> GetOne(int id)
+		//{
+		//	var deneme=new AboutGetDTO();
+		//	deneme.Id = id;
+		//	var value = await _service.GetAsync(id,x=>true);
+		//	return Ok(value);
+		//}
+
+		[HttpPost("{id}")]
 		public async Task<IActionResult> GetOne(int id)
 		{
-			var deneme=new AboutGetDTO();
+			var deneme = new AboutGetDTO();
 			deneme.Id = id;
-			var value = await _service.GetAsync(id,x=>true);
+			var value = await _service.GetAsync(id, x => true);
 			return Ok(value);
 		}
 		[HttpPost]

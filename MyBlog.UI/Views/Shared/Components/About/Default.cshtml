@@ -1,0 +1,76 @@
+﻿@model AboutModel
+<section id="about">
+
+	<div class="row section-intro">
+		<div class="col-twelve">
+
+			<h5>Hakkımda</h5>
+			
+			<div class="intro-info">
+
+				<img src="images/profile-pic.jpg" alt="Profile Picture">
+
+				
+			</div>
+
+		</div>
+	</div> <!-- /section-intro -->
+
+	<div class="row about-content">
+
+		<div class="col-six tab-full">
+
+			<h3>Ben</h3>
+			<p>@Model.About.Data.Resume</p>
+
+			<ul class="info-list">
+				<li>
+					<strong>Fullname:</strong>
+					<span>@Model.About.Data.NameSurname</span>
+				</li>
+				<li>
+					<strong>Bırth Date:</strong>
+					<span>@Model.About.Data.BirthDate.ToString("dd MMMM yyyy")</span>
+
+				</li>
+				<li>
+					<strong>Job:</strong>
+					<span>@Model.About.Data.Job</span>
+				</li>
+				<li>
+					<strong>Email:</strong>
+					<span>@Model.About.Data.Mail</span>
+				</li>
+
+			</ul> <!-- /info-list -->
+
+		</div>
+
+		<div class="col-six tab-full">
+			<h3>Yeteneklerim</h3>
+			<p>@Model.About.Data.SkillText</p>
+			@foreach (var item in Model.Skills.Data)
+			{
+				<ul class="skill-bars">
+					<li>
+						<div class="progress percent$@item.Percentile"><span>@item.Percentile%</span></div>
+						<strong>@item.Name</strong>
+					</li>
+				</ul> <!-- /skill-bars -->
+			}
+			
+
+			
+
+		</div>
+
+	</div>
+
+	<div class="row button-section">
+		<div class="col-twelve">
+			<a href="#contact" title="Hire Me" class="button stroke smoothscroll">Hire Me</a>
+			<a href="#" title="Download CV" class="button button-primary">Download CV</a>
+		</div>
+	</div>
+
+</section>

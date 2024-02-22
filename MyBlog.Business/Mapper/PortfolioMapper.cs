@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MyBlog.Entity.DTO.ContactDTO;
-using MyBlog.Entity.DTO.ImageDTO;
 using MyBlog.Entity.DTO.PortfolioDTO;
 using MyBlog.Entity.Entity;
 using System;
@@ -15,9 +14,8 @@ namespace MyBlog.Business.Mapper
 	{
 		public PortfolioMapper()
 		{
-			CreateMap<Portfolio, PortfolioGetDTO>();
-			CreateMap<PortfolioCrudDTO,Portfolio >();
-			CreateMap<ImageCrudDTO,Images >();
+			CreateMap<Portfolio, PortfolioGetDTO>().ReverseMap();
+			CreateMap<PortfolioCrudDTO,Portfolio >().ReverseMap();
 		}
 	}
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlog.Entity.DTO.ContactDTO
+namespace MyBlog.Entity.DTO.AboutDTO
 {
 	public class AboutGetDTO
 	{

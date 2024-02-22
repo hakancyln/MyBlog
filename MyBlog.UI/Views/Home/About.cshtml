@@ -1,4 +1,6 @@
-﻿<section id="about">
+﻿@using MyBlog.Entity.DTO.AboutDTO
+@model AboutGetDTO
+<section id="about">
 
 	<div class="row section-intro">
 		<div class="col-twelve">
@@ -25,15 +27,15 @@
 			<ul class="info-list">
 				<li>
 					<strong>Fullname:</strong>
-					<span>Juan Dela Cruz</span>
+					<span>@Model.NameSurname</span>
 				</li>
 				<li>
 					<strong>Birth Date:</strong>
-					<span>September 28, 1987</span>
+					<span>@Model.BirthDate</span>
 				</li>
 				<li>
 					<strong>Job:</strong>
-					<span>Freelancer, Frontend Developer</span>
+					<span>@Model.Job</span>
 				</li>
 				<li>
 					<strong>Website:</strong>
@@ -41,7 +43,7 @@
 				</li>
 				<li>
 					<strong>Email:</strong>
-					<span>me@kardswebsite.com</span>
+					<span>@Model.Mail</span>
 				</li>
 
 			</ul> <!-- /info-list -->
