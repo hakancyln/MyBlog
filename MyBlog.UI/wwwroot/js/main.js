@@ -227,7 +227,7 @@
 			$.ajax({      	
 
 		      type: "POST",
-		      url: "inc/sendEmail.php",
+		      url: "Home/Message",
 		      data: $(form).serialize(),
 		      beforeSend: function() { 
 
@@ -238,10 +238,19 @@
 
 	            // Message was sent
 	            if (msg == 'OK') {
-	            	sLoader.fadeOut(); 
-	               $('#message-warning').hide();
-	               $('#contactForm').fadeOut();
-	               $('#message-success').fadeIn();   
+					sLoader.fadeOut();
+					$('#message-warning').hide();
+					$('#contactForm').fadeOut();
+					$('#message-success').fadeIn();  
+					setTimeout(function () {
+						$('#message-success').fadeOut(); 
+						$('#contactForm').fadeIn();
+						$('#contactName').val('');
+						$('#contactSubject').val('');
+						$('#contactMessage').val('');
+						$('#contactEmail').val('');
+					}, 10000);
+	               
 	            }
 	            // There was an error
 	            else {
@@ -254,7 +263,7 @@
 		      error: function() {
 
 		      	sLoader.fadeOut(); 
-		      	$('#message-warning').html("Something went wrong. Please try again.");
+		      	$('#message-warning').html("Bir hata oldu. Tekrar deneyiniz. ");
 		         $('#message-warning').fadeIn();
 
 		      }

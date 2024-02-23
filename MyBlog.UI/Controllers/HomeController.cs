@@ -20,7 +20,12 @@ namespace MyBlog.UI.Controllers
         }
 		public async Task<PartialViewResult> Contact()
 		{
-			return PartialView();
-		}
-	}
+            return PartialView();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Message()
+        {
+            return Ok("OK");
+        }
+    }
 }

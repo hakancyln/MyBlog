@@ -4,11 +4,7 @@
 }
 
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html class="no-js" lang="tr">
- <!--<![endif]-->
 @await Html.PartialAsync("Head")
 
 <body id="top">
@@ -17,33 +13,9 @@
 	@await Component.InvokeAsync("About")
 	@await Component.InvokeAsync("Portfolio")
 	@await Html.PartialAsync("Contact")
-
-	<!-- about section
-	================================================== -->
-	 <!-- /process-->
-	<!-- resume Section
-	================================================== -->
-	 <!-- /features -->
-	<!-- Portfolio Section
-	================================================== -->
-	 <!-- /portfolio -->
-
-	<!-- services Section
-	================================================== -->
-	 <!-- /services -->
-	<!-- contact
-	================================================== -->
-	 <!-- /contact -->
-	<!-- footer
-	================================================== -->
-
-
 	<div id="preloader">
 		<div id="loader"></div>
 	</div>
-
-	<!-- Java Script
-	================================================== -->
 	<script src="js/jquery-2.1.3.min.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/main.js"></script>
