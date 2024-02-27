@@ -1,0 +1,49 @@
+﻿@using MyBlog.Entity.DTO.AboutDTO
+@using MyBlog.Entity.Result
+@model UIResponse<AboutGetDTO>
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="row bg-secondary rounded justify-content-center ">
+    <div class="bg-secondary rounded h-100 py-4 col-md-6">
+        <h6 class="mb-4">Hakkımda</h6>
+        <div class="form-floating mb-3 d-flex">
+            <img style="max-height:100px; max-width:100px;" src="~/images/@Model.Data.Photo" alt="Profil Resmi">
+
+        </div>
+
+        <form action="/UpdateAbout" method="post">
+        <div class="form-floating mb-3">
+            <input name="NameSurname" type="text" class="form-control" id="floatingInput" placeholder="Ad Soyad" value="@Model.Data.NameSurname">
+            <label for="floatingInput">Ad Soyad</label>
+        </div>
+        <div class="form-floating mb-3">
+                <input name="BirthDate" type="date" class="form-control" id="floatingPassword" placeholder="Doğum Tarihi" value="@Model.Data.BirthDate">
+            <label for="floatingPassword">Doğum Tarihi</label>
+        </div>
+        <div class="form-floating mb-3">
+                <input name="Job" type="text" class="form-control" id="floatingInput" placeholder="Front-end-Back-end" value="@Model.Data.Job">
+            <label for="floatingInput">Alan(ör: Back-end - Front-end)</label>
+        </div>
+        <div class="form-floating mb-3">
+                <input name="Mail" type="email" class="form-control" id="floatingInput" placeholder="Mail" value="@Model.Data.Mail">
+            <label for="floatingInput">Mail Adresi</label>
+        </div>
+        <div class="mb-3">
+            <label for="formFileSm" class="form-label">Profil Resmi Seç</label>
+                <input name="Photo" class="form-control bg-dark" id="formFileSm" type="file" value="@Model.Data.Photo">
+
+        </div>
+        <div class="form-floating">
+                <textarea name="Resume" class="form-control" placeholder="Kendini burda tanıt" id="floatingTextarea" style="height: 150px;" > @Model.Data.Resume</textarea>
+            <label for="floatingTextarea">Özgeçmiş</label>
+        </div>
+        <div class="form-floating mb-3 d-flex">
+            <button type="submit" class="btn btn-outline-success m-2 justify-content-end">Success</button>
+        </div>
+        </form>
+
+    </div>
+
+</div>

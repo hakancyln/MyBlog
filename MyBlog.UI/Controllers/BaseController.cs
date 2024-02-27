@@ -14,7 +14,7 @@ namespace MyBlog.UI.Controllers
 			_httpClient = httpClient;
 			_httpClient.BaseAddress = new Uri("http://localhost:7075/api/");
 		}
-		protected async Task<UIResponse<T>> UpdateAsync<T>(T p, string url) where T : class
+		public  async Task<UIResponse<T>> UpdateAsync<T>(T p, string url) where T : class
 		{
 			_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
 			var jsonData = JsonConvert.SerializeObject(p);
@@ -65,14 +65,14 @@ namespace MyBlog.UI.Controllers
 		}
 		protected async Task<UIResponse<List<T>>> GetAllAsync<T>(string url) where T : class
 		{
-			_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
+			//_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
 			var responseMessage = await _httpClient.GetAsync(url);
 
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
 				var value = JsonConvert.DeserializeObject<UIResponse<List<T>>>(jsonData);
-				_httpClient.DefaultRequestHeaders.Remove("Authorization");
+				//_httpClient.DefaultRequestHeaders.Remove("Authorization");
 				return value;
 
 
@@ -110,13 +110,13 @@ namespace MyBlog.UI.Controllers
 		}
 		protected async Task<UIResponse<T>> GetAsync<T>(string url) where T : class
 		{
-			_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
-			var responseMessage = await _httpClient.GetAsync(url);
+			//_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
+			var responseMessage = await _httpClient.PostAsync(url,null);
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
 				var value = JsonConvert.DeserializeObject<UIResponse<T>>(jsonData);
-				_httpClient.DefaultRequestHeaders.Remove("Authorization");
+				//_httpClient.DefaultRequestHeaders.Remove("Authorization");
 				return value;
 			}
 
