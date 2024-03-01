@@ -11,15 +11,15 @@ namespace MyBlog.Entity.Result
 		public int? StatusCode { get; set; }
 		public string? Message { get; set; }
 
-		public ErrorInformation? ErrorInformation { get; set; }
+		public bool? Success { get; set; }
 
 		public T? Data { get; set; }
 
 
-		public UIResponse(T data, int statustCode, ErrorInformation errorInformation, string message)
+		public UIResponse(T data, int statustCode, bool succes, string message)
 		{
 			StatusCode = statustCode;
-			ErrorInformation = errorInformation;
+			Success = succes;
 			Message = message;
 			Data = data;
 		}

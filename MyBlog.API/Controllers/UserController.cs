@@ -41,7 +41,7 @@ namespace MyBlog.API.Controllers
 		public async Task<IActionResult> AddOrUpdate(UserCrudDTO data)
 		{
 			data.Id = 1;
-			ApiResponse<bool> value;
+			ApiResponse<UserGetDTO> value;
 			if (data.Id == 0)
 			{
 				value = await _service.AddAsync(data);

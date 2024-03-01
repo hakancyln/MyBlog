@@ -35,7 +35,7 @@ namespace MyBlog.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddOrUpdate(SocialCrudDTO about)
 		{
-			ApiResponse<bool> value;
+			ApiResponse<SocialGetDTO> value;
 			if (about.Id == 0)
 			{
 				value = await _service.AddAsync(about);

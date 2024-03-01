@@ -35,7 +35,7 @@ namespace MyBlog.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddOrUpdate(PortfolioCrudDTO about)
 		{
-			ApiResponse<bool> value;
+			ApiResponse<PortfolioGetDTO> value;
 			if (about.Id == 0)
 			{
 				value = await _service.AddAsync(about);

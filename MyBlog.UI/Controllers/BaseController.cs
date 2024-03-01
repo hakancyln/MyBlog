@@ -84,7 +84,7 @@ namespace MyBlog.UI.Controllers
 					(
 						data: null,
 						statustCode: 401,
-						errorInformation: null,
+						succes: false,
 						message: "Yetkisiz"
 					);
 
@@ -98,7 +98,7 @@ namespace MyBlog.UI.Controllers
 					(
 						data: null,
 						statustCode: 401,
-						errorInformation: null,
+						succes: false,
 						message: "Oturum Açılmadı"
 					);
 

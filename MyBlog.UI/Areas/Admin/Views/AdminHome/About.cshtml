@@ -4,46 +4,155 @@
 @{
     ViewData["Title"] = "About";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    // Örnek bir DateTime nesnesi oluşturuluyor
+    DateTime birthDate = Model.Data.BirthDate;
+    // DateTime nesnesini bir tarih formatına çevirme
+    string formattedDate = birthDate.ToString("yyyy-MM-dd");
 }
 <div class="row bg-secondary rounded justify-content-center ">
     <div class="bg-secondary rounded h-100 py-4 col-md-6">
         <h6 class="mb-4">Hakkımda</h6>
-        <div class="form-floating mb-3 d-flex">
-            <img style="max-height:100px; max-width:100px;" src="~/images/@Model.Data.Photo" alt="Profil Resmi">
+        <div class="form-floating mb-3 d-flex justify-content-center">
+            <img style="height:150px; width:150px; border-radius:50%;" src="~/images/@Model.Data.Photo" alt="Profil Resmi">
 
         </div>
+        <form>
 
-        <form action="/UpdateAbout" method="post">
         <div class="form-floating mb-3">
-            <input name="NameSurname" type="text" class="form-control" id="floatingInput" placeholder="Ad Soyad" value="@Model.Data.NameSurname">
+            <input name="NameSurname" type="text" class="form-control" id="NameSurname" placeholder="Ad Soyad" value="@Model.Data.NameSurname" required>
             <label for="floatingInput">Ad Soyad</label>
         </div>
         <div class="form-floating mb-3">
-                <input name="BirthDate" type="date" class="form-control" id="floatingPassword" placeholder="Doğum Tarihi" value="@Model.Data.BirthDate">
+            <input name="BirthDate" type="date" class="form-control" id="BirthDate" placeholder="Doğum Tarihi" value="@formattedDate" required>
             <label for="floatingPassword">Doğum Tarihi</label>
         </div>
         <div class="form-floating mb-3">
-                <input name="Job" type="text" class="form-control" id="floatingInput" placeholder="Front-end-Back-end" value="@Model.Data.Job">
+            <input name="Job" type="text" class="form-control" id="Job" placeholder="Front-end-Back-end" value="@Model.Data.Job" required>
             <label for="floatingInput">Alan(ör: Back-end - Front-end)</label>
         </div>
         <div class="form-floating mb-3">
-                <input name="Mail" type="email" class="form-control" id="floatingInput" placeholder="Mail" value="@Model.Data.Mail">
+            <input name="Mail" type="email" class="form-control" id="Mail" placeholder="Mail" value="@Model.Data.Mail" required>
             <label for="floatingInput">Mail Adresi</label>
         </div>
         <div class="mb-3">
             <label for="formFileSm" class="form-label">Profil Resmi Seç</label>
-                <input name="Photo" class="form-control bg-dark" id="formFileSm" type="file" value="@Model.Data.Photo">
-
+            <input name="Photo" class="form-control bg-dark" id="Photo" type="file" value="@Model.Data.Photo">
         </div>
         <div class="form-floating">
-                <textarea name="Resume" class="form-control" placeholder="Kendini burda tanıt" id="floatingTextarea" style="height: 150px;" > @Model.Data.Resume</textarea>
+            <textarea name="Resume" class="form-control" placeholder="Kendini burda tanıt" id="Resume" style="height: 150px;" required>@Model.Data.Resume</textarea>
             <label for="floatingTextarea">Özgeçmiş</label>
         </div>
+            @* @if (!string.IsNullOrEmpty(ViewBag.Success))
+            {
+                <div class="alert alert-success">
+                    @ViewBag.Success
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            } *@
         <div class="form-floating mb-3 d-flex">
-            <button type="submit" class="btn btn-outline-success m-2 justify-content-end">Success</button>
+            <button type="submit" id="deneme"  class="btn btn-outline-success m-2 justify-content-end">Kaydet</button>
         </div>
         </form>
-
     </div>
 
 </div>
+@* <script type="text/javascript">
+    $("#deneme").click(function (e) {
+        
+        var dto = {
+            NameSurname: $("#NameSurname").val(),
+            BirthDate: $("#BirthDate").val(),
+            Job: $("#Job").val(),
+            Mail: $("#Mail").val(),
+            Photo: $("#Photo").val(),
+            Resume: $("#Resume").val()
+
+        };
+        debugger;
+        $.ajax({
+            type: "POST",
+            url: "/UpdateAbout",
+            data: dto,
+
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: "Başarılı!",
+                        text: response.responseText,
+                        icon: "success"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "HATA!!!",
+                        text: response.responseText,
+                        icon: "error"
+                    });
+                }
+                
+
+            },
+        });
+    });
+</script> *@
+
+<script type="text/javascript">
+    $("#deneme").click(function (e) {
+        e.preventDefault(); // Form submitini engelle
+
+        var formValid = true; // Form geçerliliği kontrolü
+
+        // Her form elemanını kontrol et
+        $("form input[required], form textarea[required]").each(function () {
+            // Eğer boşsa
+            if (!$(this).val()) {
+                formValid = false; // Form geçersiz
+                $(this).addClass("is-invalid"); // Hata göstergesi ekle
+                $(this).siblings(".invalid-feedback").remove(); // Var olan hata mesajını kaldır
+                $(this).after('<div class="invalid-feedback">Bu alan boş bırakılamaz.</div>'); // Yeni hata mesajı ekle
+            } else {
+                $(this).removeClass("is-invalid"); // Hata göstergesini kaldır
+                $(this).siblings(".invalid-feedback").remove(); // Hata mesajını kaldır
+            }
+        });
+
+        // Eğer form geçerliyse
+        if (formValid) {
+            var dto = {
+                NameSurname: $("#NameSurname").val(),
+                BirthDate: $("#BirthDate").val(),
+                Job: $("#Job").val(),
+                Mail: $("#Mail").val(),
+                Photo: $("#Photo").val(),
+                Resume: $("#Resume").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/UpdateAbout",
+                data: dto,
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: "Başarılı!",
+                            text: response.responseText,
+                            icon: "success"
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "HATA!!!",
+                            text: response.responseText,
+                            icon: "error"
+                        });
+                    }
+                },
+            });
+        }
+    });
+</script>
+
+

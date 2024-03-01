@@ -15,9 +15,9 @@ namespace MyBlog.Business.Abstract
 		Task<ApiResponse<TGet>> GetAsync(int id,Expression<Func<TGet, bool>> Filter, params string[] IncludeProperties);
 		Task<ApiResponse<IEnumerable<TGet>>> GetAllAsync(Expression<Func<TGet, bool>> Filter = null, params string[] IncludeProperties);
 
-		Task<ApiResponse<bool>> AddAsync(TCrud Entity);
+		Task<ApiResponse<TGet>> AddAsync(TCrud Entity);
 
-		Task<ApiResponse<bool>> UpdateAsync(TCrud Entity);
+		Task<ApiResponse<TGet>> UpdateAsync(TCrud Entity);
 
 		Task<ApiResponse<bool>> RemoveAsync(int id);
 

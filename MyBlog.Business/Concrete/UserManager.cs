@@ -71,13 +71,13 @@ namespace MyBlog.Business.Concrete
 			
 		}
 
-		public async Task<ApiResponse<bool>> UpdateUserAsync(UserCrudDTO Entity)
+		public async Task<ApiResponse<UserGetDTO>> UpdateUserAsync(UserCrudDTO Entity)
 		{
-			var result = new ApiResponse<bool>();
+			var result = new ApiResponse<UserGetDTO>();
 			var data = _mapper.Map<User>(Entity);
 			data.Password=BCrypt.Net.BCrypt.HashPassword(Entity.Password);
 			await _uow.GetRepository<User>().UpdateAsync(data);
-			result.Data = await _uow.SaveChangesAsync();
+			result.Success = await _uow.SaveChangesAsync();
 			return result;
 		}
 	}

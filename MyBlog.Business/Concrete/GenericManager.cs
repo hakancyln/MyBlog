@@ -25,12 +25,12 @@ namespace MyBlog.Business.Concrete
 			_mapper = mapper;
 			_uow = uow;
 		}
-		public async Task<ApiResponse<bool>> AddAsync(TCrud p)
+		public async Task<ApiResponse<TGet>> AddAsync(TCrud p)
 		{
-			var result = new ApiResponse<bool>();
+			var result = new ApiResponse<TGet>();
 			var data = _mapper.Map<TEntity>(p);
 			await _uow.GetRepository<TEntity>().AddAsync(data);
-			result.Data = await _uow.SaveChangesAsync();
+			result.Success = await _uow.SaveChangesAsync();
 			return result;
 		}
 
@@ -60,12 +60,12 @@ namespace MyBlog.Business.Concrete
 			return result;
 		}
 
-		public async Task<ApiResponse<bool>> UpdateAsync(TCrud p)
+		public async Task<ApiResponse<TGet>> UpdateAsync(TCrud p)
 		{
-			var result = new ApiResponse<bool>();
+			var result = new ApiResponse<TGet>();
 			var data = _mapper.Map<TEntity>(p);
 			await _uow.GetRepository<TEntity>().UpdateAsync(data);
-			result.Data = await _uow.SaveChangesAsync();
+			result.Success = await _uow.SaveChangesAsync();
 			return result;
 		}
 

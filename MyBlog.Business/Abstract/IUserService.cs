@@ -13,7 +13,7 @@ namespace MyBlog.Business.Abstract
 {
 	public interface IUserService : IGenericService<UserCrudDTO, UserGetDTO>
 	{
-		Task<ApiResponse<bool>> UpdateUserAsync(UserCrudDTO Entity);
+		Task<ApiResponse<UserGetDTO>> UpdateUserAsync(UserCrudDTO Entity);
 		Task<ApiResponse<LoginGetDTO>> LoginAsync(LoginCrudDTO Entity);
 
 
