@@ -1,0 +1,33 @@
+﻿@using MyBlog.Entity.DTO.ContactDTO
+@using MyBlog.Entity.Result
+@model UIResponse<List<ContactGetDTO>>
+
+<div class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        <i class="fa fa-envelope me-lg-2"></i>
+        <span class="d-none d-lg-inline-flex">Mesajlar</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+        @foreach (var item in Model.Data)
+        {
+            if (item.IsRead == false)
+            {
+                <a href="#" class="dropdown-item">
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-envelope me-lg-2"></i>
+                        <div class="ms-2">
+
+                            <h6 class="fw-normal mb-0">@item.Name</h6>
+                            <small>@item.Date</small>
+                        </div>
+                    </div>
+                </a>
+                <hr class="dropdown-divider">
+            }
+
+        }
+
+
+        <a href="/Admin/Contact" class="dropdown-item text-center">Tüm Mesajları Gör</a>
+    </div>
+</div>

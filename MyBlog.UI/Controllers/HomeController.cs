@@ -61,6 +61,12 @@ namespace MyBlog.UI.Controllers
             return Json(new { success = false, responseText = "Kullanýcý Adý yada þifre yanlýþ." });
 
         }
+        [HttpPost("/Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login", "Home");
+        }
 
         public async Task<PartialViewResult> Head()
         {

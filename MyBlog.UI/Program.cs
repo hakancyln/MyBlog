@@ -34,8 +34,23 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+app.UseStatusCodePagesWithReExecute("/Home/Error{0}");
+
+
+
+
 
 app.UseHttpsRedirection();
+app.Use(async (context, next) =>
+{
+    await next();
+
+    if (context.Response.StatusCode == 404 || context.Response.StatusCode == 401)
+    {
+        context.Request.Path = "/Error404";
+        await next();
+    }
+});
 app.UseStaticFiles();
 app.UseRouting(); // Routing middleware'ini ekleyin
 

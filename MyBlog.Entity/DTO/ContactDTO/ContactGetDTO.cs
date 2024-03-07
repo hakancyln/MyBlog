@@ -14,5 +14,7 @@ namespace MyBlog.Entity.DTO.ContactDTO
 		public string Mail { get; set; }
 		public string Subject { get; set; }
 		public string Message { get; set; }
-	}
+        public DateTime Date { get; set; }
+        public bool IsRead { get; set; }
+    }
 }

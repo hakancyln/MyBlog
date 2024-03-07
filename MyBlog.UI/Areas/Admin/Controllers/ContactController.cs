@@ -17,13 +17,15 @@ namespace MyBlog.UI.Areas.Admin.Controllers
         {
 
         }
+        
         [HttpGet("/Admin/Contact")]
         public async Task<IActionResult> Contact()
         {
             UIResponse<List<ContactGetDTO>> data = await GetAllAsync<ContactGetDTO>(url + "Contact/GetAll");
             return View(data);
         }
-		[HttpPost("/CrudContact")]
+        [AllowAnonymous]
+        [HttpPost("/CrudContact")]
 		public async Task<IActionResult> CrudContact(ContactCrudDTO p)
 		{
 			var data = await CrudAsync(p, url + "Contact/AddOrUpdate");

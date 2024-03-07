@@ -34,8 +34,10 @@ namespace MyBlog.API.Controllers
 			var value = await _service.GetAsync(id, x => true);
 			return Ok(value);
 		}
-		[HttpPost]
-		public async Task<IActionResult> AddOrUpdate(ContactCrudDTO about)
+		
+		[AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> AddOrUpdate(ContactCrudDTO about)
 		{
 			ApiResponse<ContactGetDTO> value;
 			if (about.Id == 0)
