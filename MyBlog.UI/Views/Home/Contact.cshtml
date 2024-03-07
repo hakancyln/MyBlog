@@ -16,23 +16,23 @@
 		<div class="col-twelve">
 
 			<!-- form -->
-			<form name="contactForm" id="contactForm" method="post" action="">
+			<form id="form" >
 				<fieldset>
 
 					<div class="form-field">
-						<input name="contactName" type="text" id="contactName" placeholder="Ad Soyad" value="" minlength="2" required="Bu alanın doldurulması zorunlu!">
+						<input name="contactName" type="text" id="Name" placeholder="Ad Soyad" value="" minlength="2" required>
 					</div>
 					<div class="form-field">
-						<input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value="" required="Bu alanın doldurulması zorunlu!">
+						<input name="contactEmail" type="email" id="Mail" placeholder="Email" value="" required>
 					</div>
 					<div class="form-field">
-						<input name="contactSubject" type="text" id="contactSubject" placeholder="Konu" value="">
+						<input name="contactSubject" type="text" id="Subject" placeholder="Konu" value="">
 					</div>
 					<div class="form-field">
-						<textarea name="contactMessage" id="contactMessage" placeholder="Mesaj" rows="10" cols="50" required="Bu alanın doldurulması zorunlu!"></textarea>
+						<textarea name="contactMessage" id="Message" placeholder="Mesaj" rows="10" cols="50" required></textarea>
 					</div>
 					<div class="form-field">
-						<button class="submitform">Gönder</button>
+						<button id="update" class="submitform">Gönder</button>
 						<div id="submit-loader">
 							<div class="text-loader">Gönderiliyor...</div>
 							<div class="s-loader">
@@ -47,6 +47,8 @@
 			</form> <!-- Form End -->
 			<!-- contact-warning -->
 			<div id="message-warning">
+				<i class="fa fa-warning"></i>Mesaj gönderilemedi.Lütfen daha sonra tekrar deneyiniz.<br>
+
 			</div>
 			<!-- contact-success -->
 			<div id="message-success">

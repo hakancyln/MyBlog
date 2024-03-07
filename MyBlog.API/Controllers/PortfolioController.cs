@@ -24,7 +24,7 @@ namespace MyBlog.API.Controllers
 			var value = await _service.GetAllAsync(x=>x.Name != null,"Images");
 			return Ok(value);
 		}
-		[HttpPost]
+		[HttpPost("{id}")]
 		public async Task<IActionResult> GetOne(int id)
 		{
 			var deneme = new PortfolioGetDTO();
@@ -44,8 +44,8 @@ namespace MyBlog.API.Controllers
 			value = await _service.UpdateAsync(about);
 			return Ok(value);
 		}
-		[HttpPost]
-		public async Task<IActionResult> Remove(int id)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Remove(int id)
 		{
 
 			var value = await _service.RemoveAsync(id);

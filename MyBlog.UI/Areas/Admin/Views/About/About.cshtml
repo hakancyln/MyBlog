@@ -18,87 +18,50 @@
         </div>
         <form>
 
-        <div class="form-floating mb-3">
-            <input name="NameSurname" type="text" class="form-control" id="NameSurname" placeholder="Ad Soyad" value="@Model.Data.NameSurname" required>
-            <label for="floatingInput">Ad Soyad</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input name="BirthDate" type="date" class="form-control" id="BirthDate" placeholder="Doğum Tarihi" value="@formattedDate" required>
-            <label for="floatingPassword">Doğum Tarihi</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input name="Job" type="text" class="form-control" id="Job" placeholder="Front-end-Back-end" value="@Model.Data.Job" required>
-            <label for="floatingInput">Alan(ör: Back-end - Front-end)</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input name="Mail" type="email" class="form-control" id="Mail" placeholder="Mail" value="@Model.Data.Mail" required>
-            <label for="floatingInput">Mail Adresi</label>
-        </div>
-        <div class="mb-3">
-            <label for="formFileSm" class="form-label">Profil Resmi Seç</label>
-            <input name="Photo" class="form-control bg-dark" id="Photo" type="file" value="@Model.Data.Photo">
-        </div>
-        <div class="form-floating">
-            <textarea name="Resume" class="form-control" placeholder="Kendini burda tanıt" id="Resume" style="height: 150px;" required>@Model.Data.Resume</textarea>
-            <label for="floatingTextarea">Özgeçmiş</label>
-        </div>
+            <div class="form-floating mb-3">
+                <input name="NameSurname" type="text" class="form-control" id="NameSurname" placeholder="Ad Soyad" value="@Model.Data.NameSurname" required>
+                <label for="floatingInput">Ad Soyad</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input name="BirthDate" type="date" class="form-control" id="BirthDate" placeholder="Doğum Tarihi" value="@formattedDate" required>
+                <label for="floatingPassword">Doğum Tarihi</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input name="Job" type="text" class="form-control" id="Job" placeholder="Front-end-Back-end" value="@Model.Data.Job" required>
+                <label for="floatingInput">Alan(ör: Back-end - Front-end)</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input name="Mail" type="email" class="form-control" id="Mail" placeholder="Mail" value="@Model.Data.Mail" required>
+                <label for="floatingInput">Mail Adresi</label>
+            </div>
+            <div class="mb-3">
+                <label for="formFileSm" class="form-label">Profil Resmi Seç</label>
+                <input name="Photo" class="form-control bg-dark" id="Photo" type="file" value="@Model.Data.Photo">
+            </div>
+            <div class="form-floating">
+                <textarea name="Resume" class="form-control" placeholder="Kendini burda tanıt" id="Resume" style="height: 150px;" required>@Model.Data.Resume</textarea>
+                <label for="floatingTextarea">Özgeçmiş</label>
+            </div>
             @* @if (!string.IsNullOrEmpty(ViewBag.Success))
             {
-                <div class="alert alert-success">
-                    @ViewBag.Success
-                </div>
+            <div class="alert alert-success">
+            @ViewBag.Success
+            </div>
             }
             @if (!string.IsNullOrEmpty(ViewBag.Error))
             {
-                <div class="alert alert-danger">
-                    @ViewBag.Error
-                </div>
+            <div class="alert alert-danger">
+            @ViewBag.Error
+            </div>
             } *@
-        <div class="form-floating mb-3 d-flex">
-            <button type="submit" id="deneme"  class="btn btn-outline-success m-2 justify-content-end">Kaydet</button>
-        </div>
+            <div class="form-floating mb-3 d-flex">
+                <button type="submit" id="deneme" class="btn btn-outline-success m-2 justify-content-end">Kaydet</button>
+            </div>
         </form>
     </div>
 
 </div>
-@* <script type="text/javascript">
-    $("#deneme").click(function (e) {
-        
-        var dto = {
-            NameSurname: $("#NameSurname").val(),
-            BirthDate: $("#BirthDate").val(),
-            Job: $("#Job").val(),
-            Mail: $("#Mail").val(),
-            Photo: $("#Photo").val(),
-            Resume: $("#Resume").val()
 
-        };
-        debugger;
-        $.ajax({
-            type: "POST",
-            url: "/UpdateAbout",
-            data: dto,
-
-            success: function (response) {
-                if (response.success) {
-                    Swal.fire({
-                        title: "Başarılı!",
-                        text: response.responseText,
-                        icon: "success"
-                    });
-                } else {
-                    Swal.fire({
-                        title: "HATA!!!",
-                        text: response.responseText,
-                        icon: "error"
-                    });
-                }
-                
-
-            },
-        });
-    });
-</script> *@
 
 <script type="text/javascript">
     $("#deneme").click(function (e) {

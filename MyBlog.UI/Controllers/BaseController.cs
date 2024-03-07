@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
 using MyBlog.Entity.Result;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
@@ -14,7 +17,7 @@ namespace MyBlog.UI.Controllers
 			_httpClient = httpClient;
 			_httpClient.BaseAddress = new Uri("http://localhost:7075/api/");
 		}
-		public  async Task<UIResponse<T>> UpdateAsync<T>(T p, string url) where T : class
+		public  async Task<UIResponse<T>> CrudAsync<T>(T p, string url) where T : class
 		{
 			_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
 			var jsonData = JsonConvert.SerializeObject(p);
@@ -30,31 +33,31 @@ namespace MyBlog.UI.Controllers
 
 			return null;
 		}
-		protected async Task<UIResponse<T>> AddAsync<T>(T p, string url) where T : class
-		{
-			_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
-			var jsonData = JsonConvert.SerializeObject(p);
-			StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-			var responseMessage = await _httpClient.PostAsync(url, stringContent);
+		//protected async Task<UIResponse<T>> AddAsync<T>(T p, string url) where T : class
+		//{
+		//	_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
+		//	var jsonData = JsonConvert.SerializeObject(p);
+		//	StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+		//	var responseMessage = await _httpClient.PostAsync(url, stringContent);
 
-			if (responseMessage.IsSuccessStatusCode)
-			{
+		//	if (responseMessage.IsSuccessStatusCode)
+		//	{
 
-				var jsonDataw = await responseMessage.Content.ReadAsStringAsync();
-				var value = JsonConvert.DeserializeObject<UIResponse<T>>(jsonDataw);
-				_httpClient.DefaultRequestHeaders.Remove("Authorization");
-				return value;
-			}
-			var jsonDataw2 = await responseMessage.Content.ReadAsStringAsync();
-			var value2 = JsonConvert.DeserializeObject<UIResponse<T>>(jsonDataw2);
-			_httpClient.DefaultRequestHeaders.Remove("Authorization");
-			return value2;
-		}
+		//		var jsonDataw = await responseMessage.Content.ReadAsStringAsync();
+		//		var value = JsonConvert.DeserializeObject<UIResponse<T>>(jsonDataw);
+		//		_httpClient.DefaultRequestHeaders.Remove("Authorization");
+		//		return value;
+		//	}
+		//	var jsonDataw2 = await responseMessage.Content.ReadAsStringAsync();
+		//	var value2 = JsonConvert.DeserializeObject<UIResponse<T>>(jsonDataw2);
+		//	_httpClient.DefaultRequestHeaders.Remove("Authorization");
+		//	return value2;
+		//}
 		protected async Task<bool> DeleteAsync(string url)
 		{
 			_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
 
-			HttpResponseMessage responseMessage = await _httpClient.DeleteAsync(url);
+			HttpResponseMessage responseMessage = await _httpClient.PostAsync(url,null);
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				_httpClient.DefaultRequestHeaders.Remove("Authorization");
@@ -63,52 +66,22 @@ namespace MyBlog.UI.Controllers
 
 			return false;
 		}
-		protected async Task<UIResponse<List<T>>> GetAllAsync<T>(string url) where T : class
-		{
-			//_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
-			var responseMessage = await _httpClient.GetAsync(url);
+        protected async Task<UIResponse<List<T>>> GetAllAsync<T>(string url) where T : class
+        {
+            _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
+            var responseMessage = await _httpClient.PostAsync(url, null);
+            UIResponse<List<T>> value = null;
 
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				var jsonData = await responseMessage.Content.ReadAsStringAsync();
-				var value = JsonConvert.DeserializeObject<UIResponse<List<T>>>(jsonData);
-				//_httpClient.DefaultRequestHeaders.Remove("Authorization");
-				return value;
-
-
-			}
-			else if (responseMessage.StatusCode == HttpStatusCode.Forbidden)
-			{
-				_httpClient.DefaultRequestHeaders.Remove("Authorization");
-				var forbiddenResponse = new UIResponse<List<T>>
-					(
-						data: null,
-						statustCode: 401,
-						succes: false,
-						message: "Yetkisiz"
-					);
-
-				return forbiddenResponse;
-
-			}
-			else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
-			{
-				_httpClient.DefaultRequestHeaders.Remove("Authorization");
-				var unauthorizedResponse = new UIResponse<List<T>>
-					(
-						data: null,
-						statustCode: 401,
-						succes: false,
-						message: "Oturum Açılmadı"
-					);
-
-				return unauthorizedResponse;
-
-			}
-
-			return null;
-		}
-		protected async Task<UIResponse<T>> GetAsync<T>(string url) where T : class
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                value = JsonConvert.DeserializeObject<UIResponse<List<T>>>(jsonData);
+                _httpClient.DefaultRequestHeaders.Remove("Authorization");
+                return value;
+            }
+            return value;
+        }
+        protected async Task<UIResponse<T>> GetAsync<T>(string url) where T : class
 		{
 			//_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
 			var responseMessage = await _httpClient.PostAsync(url,null);
@@ -119,7 +92,6 @@ namespace MyBlog.UI.Controllers
 				//_httpClient.DefaultRequestHeaders.Remove("Authorization");
 				return value;
 			}
-
 			return null;
 		}
 	}

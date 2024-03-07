@@ -1,0 +1,80 @@
+﻿@using MyBlog.Entity.DTO.SkillsDTO
+@using MyBlog.Entity.Result
+@model UIResponse<List<SkillsGetDTO>>
+
+@{
+    ViewData["Title"] = "Skills";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bg-secondary rounded h-100 p-4">
+    <h6 class="mb-4">Yeteneklerim</h6>
+    <button type="button" class="btn btn-outline-success m-2 float-end" id="ekle" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ekle</button>
+    <!-- Button trigger modal -->
+
+    <div class="modal fade" id="staticBackdropUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <form id="form">
+                    <div class="modal-header bg-secondary">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    </div>
+                    <input name="Id" type="text" class="form-control" id="Id" hidden="hidden">
+                    <div class=" bg-secondary modal-body">
+                            <input autocomplete="off" name="Image" type="text" class="form-control" id="Image" hidden="hidden">
+                        <div class="form-floating mb-3 ">
+                            <input autocomplete="off" name="Name" type="text" class="form-control" id="Name" placeholder="İsim" required>
+                            <label for="floatingInput">İsim</label>
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            <input autocomplete="off" name="Percentile" type="text" class="form-control" id="Percentile" placeholder="Yüzde" required>
+                            <label for="floatingInput">Yüzde</label>
+                        </div>                       
+                    </div>
+                    <div class="modal-footer bg-secondary">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">İptal</button>
+                        <button type="submit" id="update" class="btn btn-outline-success">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead >
+            <tr >
+                <th class=" col-md-3" >İsim</th>
+                <th class="col-md-5 p-3" >Yüzde</th> 
+                
+                <th class="col-md-4" ></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Update Modal-->
+            @foreach (var item in Model.Data)
+            {
+                <tr>
+                    <td class="p-2">@item.Name</td>
+                    <td>
+                        <div class="bg-secondary rounded h-100 p-3">
+                            <div class="pg-bar mb-3">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped" name="Percentile" role="progressbar" aria-valuenow="@item.Percentile" aria-valuemin="0" aria-valuemax="100">@item.Percentile%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    
+                    <td class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" id="guncelle" onclick="Update('@item.Id','@item.Name','@item.Percentile')">Güncelle</button>
+                        <button type="button" id="delete" onclick="confirmDelete(@item.Id)" class="btn btn-outline-danger m-2">Sil</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<script src="~/js/skills.js" asp-append-version="true"></script>

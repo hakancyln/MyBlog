@@ -1,31 +1,58 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using MyBlog.UI.Middleware;
+using System.Net;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    // Diðer kimlik doðrulama ayarlarýný burada yapabilirsiniz.
+}).AddCookie(options =>
+{
+    options.LoginPath = "/Login";
+    // Diðer cookie ayarlarýný burada yapabilirsiniz.
+});
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(20);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddHttpClient();
+builder.Services.AddAuthorization(); // Yetkilendirme servisini ekleyin
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// HTTP request pipeline'ýný yapýlandýrýn
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-app.UseSession();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseRouting(); // Routing middleware'ini ekleyin
 
-app.UseRouting();
+app.UseAuthentication(); // Yetkilendirme middleware'ini ekleyin
+app.UseAuthorization(); // Yetkilendirme middleware'ini ekleyin (UseAuthentication'dan sonra olmalýdýr)
 
-app.UseAuthorization();
+app.UseSession();
+app.UseMiddleware<LoginCheckMiddleware>(); // Özel yetkilendirme middleware'ini ekleyin
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapControllerRoute(
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapControllerRoute(
         name: "Admin",
         pattern: "{area:exists}/{controller=AdminHome}/{action=Index}/{id?}");
+});
+
 app.Run();

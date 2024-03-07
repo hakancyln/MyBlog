@@ -1,0 +1,86 @@
+﻿﻿@using MyBlog.Entity.DTO.PortfolioDTO
+@using MyBlog.Entity.Result
+@model UIResponse<List<PortfolioGetDTO>>
+@{
+    ViewData["Title"] = "Portfolio";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bg-secondary rounded h-100 p-4">
+    <h6 class="mb-4">Çalışmalarım</h6>
+    <button type="button" class="btn btn-outline-success m-2 float-end" id="ekle" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ekle</button>
+    <!-- Button trigger modal -->
+
+    <div class="modal fade" id="staticBackdropUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <form id="form">
+                    <div class="modal-header bg-secondary">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    </div>
+                    <input name="Id" type="text" class="form-control" id="Id" hidden="hidden">
+                    <div class=" bg-secondary modal-body">
+                        <div class="form-floating mb-3 d-flex justify-content-center">
+                            <img style="height:150px; width:150px; border-radius:50%;" src="~/images/portfolio/" id="Image1" alt="Profil Resmi">
+                            <input autocomplete="off" name="Image" type="text" class="form-control" id="Image" hidden="hidden" >
+
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            <input autocomplete="off" name="Name" type="text" class="form-control" id="Name1" placeholder="İsim" required>
+                            <label for="floatingInput">İsim</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea autocomplete="off" name="Description" class="form-control" placeholder="Proje Açıklaması" id="Description1" required style="height: 150px;"></textarea>
+                            <label for="floatingTextarea">Açıklama</label>
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            <input autocomplete="off" name="Url" type="text" class="form-control" id="Url1" placeholder="Link" required>
+                            <label for="floatingInput">Link</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFileSm" class="form-label">Proje Resmi Seç</label>
+                            <input name="Image" id="Image2" class="form-control bg-dark" type="file" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-secondary">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">İptal</button>
+                        <button type="submit" id="update" class="btn btn-outline-success">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">İsim</th>
+                <th scope="col">Açıklama</th>
+                <th scope="col">Link</th>
+                <th scope="col">Resim</th>
+                <th scope="col" width="60"></th>
+                <th scope="col" width="60"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Update Modal-->
+            @foreach (var item in Model.Data)
+            {
+                <tr id="@item.Id">
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Url</td>
+                    <td><img height="40" width="40" src="~/images/portfolio/@item.Image" /></td>
+                    <td>
+                        <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" id="guncelle" onclick="Update('@item.Id','@item.Name','@item.Description','@item.Url','@item.Image')">Güncelle</button>
+                    </td>
+                    <td><button type="button" id="delete" onclick="confirmDelete(@item.Id)" class="btn btn-outline-danger m-2">Sil</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<script src="~/js/portfolio.js" asp-append-version="true"></script>
