@@ -91,6 +91,42 @@
                     </div>
                 </div>
             </nav>
+            <div class="modal fade" id="staticBackdropMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header bg-secondary">
+                            <h2 class="modal-title fs-5" id="staticBackdropLabel"></h2>
+                            <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" id="isRead" aria-label="Close">X</button>
+                        </div>
+                        <input autocomplete="off" hidden name="Id" type="text" class="form-control" id="Id" placeholder="İsim" style="background:black;" readonly>
+
+                        <div class=" bg-secondary modal-body">
+                            <label class="modal-title bg-secondary" id="Date"></label>
+
+                            <div class="form-floating mb-3 ">
+                                <input autocomplete="off" name="Name" type="text" class="form-control" id="Name" placeholder="İsim" style="background:black;" readonly>
+                                <label for="floatingInput">İsim</label>
+                            </div>
+                            <div class="form-floating mb-3 ">
+                                <input autocomplete="off" name="Mail" type="text" class="form-control" id="Mail" placeholder="Mail" style="background:black;" readonly>
+                                <label for="floatingInput">Mail</label>
+                            </div>
+                            <div class="form-floating mb-3 ">
+                                <input autocomplete="off" name="Subject" type="text" class="form-control" id="Subject" placeholder="Subject" style="background:black;" readonly>
+                                <label for="floatingInput">Konu</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea autocomplete="off" name="Message" class="form-control" placeholder="Proje Açıklaması" id="Message" readonly style="height: 150px; background:black;"></textarea>
+                                <label for="floatingTextarea">Açıklama</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer bg-secondary">
+
+                            <button type="button" id="isRead" class="btn btn-outline-danger" data-bs-dismiss="modal">İptal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Navbar End -->
             <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
@@ -116,6 +152,7 @@
     <script src="~/admin/lib/tempusdominus/js/moment.min.js"></script>
     <script src="~/admin/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="~/admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="~/js/contact.js" asp-append-version="true"></script>
 
     <!-- Template Javascript -->
     <script src="~/admin/js/main.js"></script>

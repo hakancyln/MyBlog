@@ -29,6 +29,7 @@ namespace MyBlog.UI.Areas.Admin.ViewComponents
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var value = JsonConvert.DeserializeObject<UIResponse<IEnumerable<ContactGetDTO>>>(jsonData);
                 //_httpClient.DefaultRequestHeaders.Remove("Authorization");
+                value.Data=value.Data.OrderBy(x=>x.Date);
                 return View(value);
             }
 

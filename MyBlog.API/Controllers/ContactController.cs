@@ -19,8 +19,8 @@ namespace MyBlog.API.Controllers
 		{
 			_service = service;
 		}
-
-		[HttpPost]
+        [AllowAnonymous]
+        [HttpPost]
 		public async Task<IActionResult> GetAll()
 		{
 			var value = await _service.GetAllAsync();

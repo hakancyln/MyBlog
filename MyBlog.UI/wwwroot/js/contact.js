@@ -6,24 +6,51 @@ $("#ekle").click(function (e) {
     $("#Mail").val("");
     $("#Subject").val("");
     $("#Message").val("");
+    $("#Date").text("");
     
     var baslik = "Yetenek Ekle";
 
     $("#staticBackdropLabel").text(baslik);
 
-    $('#staticBackdropUpdate').modal("show");
+    $('#staticBackdropMessage').modal("show");
 });
-function Update(Id, Name, Mail,Subject,Message) {
+function Update(Id, Name, Mail,Subject,Message,Dates) {
 
     $("#Id").val(Id);
     $("#Name").val(Name);
     $("#Mail").val(Mail);
     $("#Subject").val(Subject);
     $("#Message").val(Message);
+    $("#Date").text("Tarih: "+Dates);
     baslik = "Mesaj Detay";
     $("#staticBackdropLabel").text(baslik);
-    $("#staticBackdropUpdate").modal("show");
+    $("#staticBackdropMessage").modal("show");
+
+    var formData = new FormData();
+
+    // Form alanlarını FormData'ya ekle
+    formData.append("Id", $("#Id").val());
+    formData.append("Name", $("#Name").val());
+    formData.append("Mail", $("#Mail").val());
+    formData.append("Subject", $("#Subject").val());
+    formData.append("Message", $("#Message").val());
+    formData.append("Date", $("#Date").text());
+    formData.append("IsRead", true);
+
+
+    $.ajax({
+        type: "POST",
+        url: "/CrudContact",
+        data: formData,
+        processData: false,  // processData ve contentType false olmalı
+        contentType: false
+
+    });
+
 }
+$("#isRead").click(function (e) {
+    location.reload();
+});
 $("#update").click(function (e) {
     e.preventDefault(); // Form submitini engelle
 
@@ -53,6 +80,8 @@ $("#update").click(function (e) {
         formData.append("Mail", $("#Mail").val());
         formData.append("Subject", $("#Subject").val());
         formData.append("Message", $("#Message").val());
+        formData.append("Date", $("#Date").text());
+        formData.append("IsRead", false);
         
 
         $.ajax({
@@ -65,10 +94,12 @@ $("#update").click(function (e) {
                 if (response.success) {
                     $("#form").hide();
                     $("#message-success").show();
+                    $("#Id").val("");
                     $("#Name").val("");
                     $("#Mail").val("");
                     $("#Subject").val("");
                     $("#Message").val("");
+                    $("#Date").text("");
                     setTimeout(function () {
                         $("#form").show();
                         $("#message-success").hide();

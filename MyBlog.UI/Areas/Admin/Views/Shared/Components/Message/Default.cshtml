@@ -1,6 +1,9 @@
 ﻿@using MyBlog.Entity.DTO.ContactDTO
 @using MyBlog.Entity.Result
-@model UIResponse<List<ContactGetDTO>>
+@model UIResponse<IEnumerable<ContactGetDTO>>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/tr.min.js"></script>
+
 
 <div class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -8,17 +11,26 @@
         <span class="d-none d-lg-inline-flex">Mesajlar</span>
     </a>
     <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-        @foreach (var item in Model.Data)
+        @foreach (var item in Model.Data.Reverse())
         {
             if (item.IsRead == false)
             {
-                <a href="#" class="dropdown-item">
+                <a class="dropdown-item" id="guncelle" onclick="Update('@item.Id','@item.Name','@item.Mail','@item.Subject','@item.Message','@item.Date')" style="cursor:p;">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-envelope me-lg-2"></i>
                         <div class="ms-2">
 
                             <h6 class="fw-normal mb-0">@item.Name</h6>
-                            <small>@item.Date</small>
+                            <script>
+                                // Veri nesnesi olarak @item.Date'i JavaScript'e aktardığımızı varsayalım
+                                var date = "@item.Date"; // Örnek: "7.03.2024 17:23:12"
+
+                                // Moment.js kullanarak verilen tarih değerini işleyelim
+                                var formattedDate = moment(date, "DD.MM.YYYY HH:mm:ss").startOf('second').fromNow();
+                                
+                                // Sonucu sayfada gösterelim
+                                document.write('<small>' + formattedDate + '</small>');
+                            </script>
                         </div>
                     </div>
                 </a>
@@ -29,5 +41,7 @@
 
 
         <a href="/Admin/Contact" class="dropdown-item text-center">Tüm Mesajları Gör</a>
+
     </div>
 </div>
+<script src="~/js/contact.js" asp-append-version="true"></script>
