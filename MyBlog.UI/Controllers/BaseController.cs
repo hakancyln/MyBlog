@@ -66,16 +66,16 @@ namespace MyBlog.UI.Controllers
 
 			return false;
 		}
-        protected async Task<UIResponse<List<T>>> GetAllAsync<T>(string url) where T : class
+        protected async Task<UIResponse<IEnumerable<T>>> GetAllAsync<T>(string url) where T : class
         {
             _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
             var responseMessage = await _httpClient.PostAsync(url, null);
-            UIResponse<List<T>> value = null;
+            UIResponse<IEnumerable<T>> value = null;
 
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                value = JsonConvert.DeserializeObject<UIResponse<List<T>>>(jsonData);
+                value = JsonConvert.DeserializeObject<UIResponse<IEnumerable<T>>>(jsonData);
                 _httpClient.DefaultRequestHeaders.Remove("Authorization");
                 return value;
             }

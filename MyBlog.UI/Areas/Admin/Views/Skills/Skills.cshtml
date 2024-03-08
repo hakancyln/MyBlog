@@ -1,6 +1,6 @@
 ﻿@using MyBlog.Entity.DTO.SkillsDTO
 @using MyBlog.Entity.Result
-@model UIResponse<List<SkillsGetDTO>>
+@model UIResponse<IEnumerable<SkillsGetDTO>>
 
 @{
     ViewData["Title"] = "Skills";
@@ -20,11 +20,12 @@
                         <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
                         <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
-                    <input name="Id" type="text" class="form-control" id="Id" hidden="hidden">
+                    
                     <div class=" bg-secondary modal-body">
+                        <input hidden name="Id" type="text" class="form-control" id="Id19">
                             <input autocomplete="off" name="Image" type="text" class="form-control" id="Image" hidden="hidden">
                         <div class="form-floating mb-3 ">
-                            <input autocomplete="off" name="Name" type="text" class="form-control" id="Name" placeholder="İsim" required>
+                            <input autocomplete="off" name="Name" type="text" class="form-control" id="Name19" placeholder="İsim" required>
                             <label for="floatingInput">İsim</label>
                         </div>
                         <div class="form-floating mb-3 ">

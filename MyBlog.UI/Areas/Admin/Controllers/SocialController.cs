@@ -23,7 +23,7 @@ namespace MyBlog.UI.Areas.Admin.Controllers
         [HttpGet("/Admin/Social")]
         public async Task<IActionResult> Social()
         {
-            UIResponse<List<SocialGetDTO>> data = await GetAllAsync<SocialGetDTO>(url + "Social/GetAll");
+            UIResponse<IEnumerable<SocialGetDTO>> data = await GetAllAsync<SocialGetDTO>(url + "Social/GetAll");
             return View(data);
         }
         [HttpPost("/CrudSocial")]

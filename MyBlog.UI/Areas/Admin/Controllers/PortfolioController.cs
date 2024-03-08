@@ -21,7 +21,7 @@ namespace MyBlog.UI.Areas.Admin.Controllers
         [HttpGet("/Admin/Portfolio")]
         public async Task<IActionResult> Portfolio()
         {
-            UIResponse<List<PortfolioGetDTO>> data = await GetAllAsync<PortfolioGetDTO>(url + "Portfolio/GetAll");
+            UIResponse<IEnumerable<PortfolioGetDTO>> data = await GetAllAsync<PortfolioGetDTO>(url + "Portfolio/GetAll");
             return View(data);
         }
         [HttpPost("/CrudPortfolio")]

@@ -21,7 +21,8 @@ namespace MyBlog.UI.Areas.Admin.Controllers
         [HttpGet("/Admin/Contact")]
         public async Task<IActionResult> Contact()
         {
-            UIResponse<List<ContactGetDTO>> data = await GetAllAsync<ContactGetDTO>(url + "Contact/GetAll");
+            UIResponse<IEnumerable<ContactGetDTO>> data = await GetAllAsync<ContactGetDTO>(url + "Contact/GetAll");
+            data.Data = data.Data.OrderBy(x=>x.Date);
             return View(data);
         }
         [AllowAnonymous]

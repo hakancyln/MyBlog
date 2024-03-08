@@ -1,18 +1,149 @@
 ﻿@using MyBlog.Entity.DTO.ContactDTO
 @using MyBlog.Entity.Result
-@model UIResponse<List<ContactGetDTO>>
+@model UIResponse<IEnumerable<ContactGetDTO>>
 @{
     ViewData["Title"] = "Contact";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div class="bg-secondary rounded h-100 p-4">
-    <h6 class="mb-4">Gelen Mesajlar</h6>
-    <!-- Button trigger modal -->
 
-    
+<div id="accordion">
+    <div class="card bg-secondary ">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Okunmamış Mesajlar
+                </button>
+            </h5>
+        </div>
 
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <table id="myTable" class="table">
+                    <thead>
+                        <tr>
+                            <th class=" col-md-3">İsim</th>
+                            <th class="col-md-5 p-3">Mail</th>
+                            <th class="col-md-5 p-3">Konu</th>
+
+                            <th class="col-md-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Update Modal-->
+                        @if (Model.Data == null)
+                        {
+
+                        }
+                        else
+                        {
+                            foreach (var item in Model.Data)
+                            {
+                                if (item.IsRead == false)
+                                {
+                                    <tr>
+                                        <td class="p-2">@item.Name</td>
+                                        <td class="p-2">@item.Mail</td>
+                                        <td class="p-2">@item.Subject</td>
+
+
+                                        <td class="d-flex justify-content-end">
+                                            <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" id="guncelle" onclick="Update('@item.Id','@item.Name','@item.Mail','@item.Subject','@item.Message')">Detay</button>
+                                            <button type="button" id="delete" onclick="confirmDelete(@item.Id)" class="btn btn-outline-danger m-2">Sil</button>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                }
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="accordion">
+    <div class="card bg-secondary ">
+        <div class="card-header" id="headingOne1">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+                    Okunan Mesajlar
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne1" data-parent="#accordion">
+            <div class="card-body">
+                <table id="myTable" class="table">
+                    <thead>
+                        <tr>
+                            <th class=" col-md-3">Tarih</th>
+                            <th class=" col-md-3">İsim</th>
+                            <th class="col-md-5 p-3">Mail</th>
+                            <th class="col-md-5 p-3">Konu</th>
+
+                            <th class="col-md-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Update Modal-->
+                        @if (Model.Data == null)
+                        {
+
+                        }
+                        else
+                        {
+                            foreach (var item in Model.Data.Reverse())
+                            {
+                                if (item.IsRead == true)
+                                {
+                                    <tr>
+                                        <td class="p-2">@item.Name</td>
+                                        <td class="p-2">@item.Mail</td>
+                                        <td class="p-2">@item.Subject</td>
+
+
+                                        <td class="d-flex justify-content-end">
+                                            <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" id="guncelle1" onclick="Update1('@item.Id','@item.Name','@item.Mail','@item.Subject','@item.Message')">Detay</button>
+                                            <button type="button" id="delete" onclick="confirmDelete1(@item.Id)" class="btn btn-outline-danger m-2">Sil</button>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                }
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // Tablo başlığına tıklandığında açılıp kapanmasını sağlar
+        $('#headingOne').click(function () {
+            $('#collapseOne').collapse('toggle');
+        });
+    });
+    $(document).ready(function () {
+        // Tablo başlığına tıklandığında açılıp kapanmasını sağlar
+        $('#headingOne1').click(function () {
+            $('#collapseOne1').collapse('toggle');
+        });
+    });
+</script>
+@* <div class="bg-secondary rounded h-100 p-4">
+    <h6 class="mb-4">Okunan Mesajlar</h6>
     <table class="table">
+
         <thead>
             <tr>
                 <th class=" col-md-3">İsim</th>
@@ -32,23 +163,28 @@
             {
                 foreach (var item in Model.Data)
                 {
-                    <tr>
-                        <td class="p-2">@item.Name</td>
-                        <td class="p-2">@item.Mail</td>
-                        <td class="p-2">@item.Subject</td>
+                    if (item.IsRead == true)
+                    {
+                        <tr>
+                            <td class="p-2">@item.Name</td>
+                            <td class="p-2">@item.Mail</td>
+                            <td class="p-2">@item.Subject</td>
 
 
-                        <td class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" id="guncelle" onclick="Update('@item.Id','@item.Name','@item.Mail','@item.Subject','@item.Message')">Detay</button>
-                            <button type="button" id="delete" onclick="confirmDelete(@item.Id)" class="btn btn-outline-danger m-2">Sil</button>
-                        </td>
-                    </tr>
+                            <td class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" id="guncelle" onclick="Update('@item.Id','@item.Name','@item.Mail','@item.Subject','@item.Message')">Detay</button>
+                                <button type="button" id="delete" onclick="confirmDelete(@item.Id)" class="btn btn-outline-danger m-2">Sil</button>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                    }
+
                 }
             }
 
         </tbody>
     </table>
-
-</div>
-
+</div> *@
 <script src="~/js/contact.js" asp-append-version="true"></script>

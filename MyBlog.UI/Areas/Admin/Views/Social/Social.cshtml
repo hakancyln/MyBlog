@@ -1,6 +1,6 @@
 ﻿@using MyBlog.Entity.DTO.SocialDTO
 @using MyBlog.Entity.Result
-@model UIResponse<List<SocialGetDTO>>
+@model UIResponse<IEnumerable<SocialGetDTO>>
 
 @{
     ViewData["Title"] = "Social";
@@ -28,7 +28,7 @@
 
                         </div>
                         <div class="form-floating mb-3 ">
-                            <input autocomplete="off" name="Name" type="text" class="form-control" id="Name" placeholder="İsim" required>
+                            <input autocomplete="off" name="Name" type="text" class="form-control" id="Name18" placeholder="İsim" required>
                             <label for="floatingInput">İsim</label>
                         </div>                       
                         <div class="form-floating mb-3 ">

@@ -1,6 +1,6 @@
 ﻿
 var baslik = "";
-$("#ekle").click(function (e) {
+$("#ekle1").click(function (e) {
     $("#Id").val("");
     $("#Name").val("");
     $("#Mail").val("");
@@ -10,11 +10,11 @@ $("#ekle").click(function (e) {
     
     var baslik = "Yetenek Ekle";
 
-    $("#staticBackdropLabel").text(baslik);
+    $("#staticBackdropLabel1").text(baslik);
 
-    $('#staticBackdropMessage').modal("show");
+    $('#staticBackdropMessage1').modal("show");
 });
-function Update(Id, Name, Mail,Subject,Message,Dates) {
+function Update1(Id, Name, Mail,Subject,Message,Dates) {
 
     $("#Id").val(Id);
     $("#Name").val(Name);
@@ -23,7 +23,7 @@ function Update(Id, Name, Mail,Subject,Message,Dates) {
     $("#Message").val(Message);
     $("#Date").text("Tarih: "+Dates);
     baslik = "Mesaj Detay";
-    $("#staticBackdropLabel").text(baslik);
+    $("#staticBackdropLabel1").text(baslik);
     $("#staticBackdropMessage").modal("show");
 
     var formData = new FormData();
@@ -50,8 +50,10 @@ function Update(Id, Name, Mail,Subject,Message,Dates) {
 }
 $("#isRead").click(function (e) {
     location.reload();
+});$("#isRead1").click(function (e) {
+    location.reload();
 });
-$("#update").click(function (e) {
+$("#update1").click(function (e) {
     e.preventDefault(); // Form submitini engelle
 
     var formValid = true; // Form geçerliliği kontrolü
@@ -116,7 +118,7 @@ $("#update").click(function (e) {
         });
     }
 });
-function confirmDelete(id) {
+function confirmDelete1(id) {
     // Swal onay iletişim kutusu gösterme
     Swal.fire({
         title: "Emin misiniz?",

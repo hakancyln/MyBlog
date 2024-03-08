@@ -2,7 +2,7 @@
 var baslik = "";
 $("#ekle").click(function (e) {
     $("#Id").val("");
-    $("#Name").val("");
+    $("#Name18").val("");
     $("#Url").val("");
     $("#Image1").attr("src", "");
     
@@ -15,7 +15,7 @@ $("#ekle").click(function (e) {
 function Update(Id, Name, Image,Url) {
 
     $("#Id").val(Id);
-    $("#Name").val(Name);
+    $("#Name18").val(Name);
     var fullImagePath = '/images/' + Image;
     $("#Image1").attr("src", fullImagePath);
     $("#Image").val(Image);
@@ -49,7 +49,7 @@ $("#update").click(function (e) {
 
         // Form alanlarını FormData'ya ekle
         formData.append("Id", $("#Id").val());
-        formData.append("Name", $("#Name").val());
+        formData.append("Name", $("#Name18").val());
         formData.append("Url", $("#Url").val());
         formData.append("Image", $("#Image").val());
         var file = $("#Image2")[0].files[0];

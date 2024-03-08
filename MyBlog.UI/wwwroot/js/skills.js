@@ -1,8 +1,8 @@
 ﻿
 var baslik = "";
 $("#ekle").click(function (e) {
-    $("#Id").val("");
-    $("#Name").val("");
+    $("#Id19").val("");
+    $("#Name19").val("");
     $("#Percentile").val("");
     
     var baslik = "Yetenek Ekle";
@@ -12,9 +12,8 @@ $("#ekle").click(function (e) {
     $('#staticBackdropUpdate').modal("show");
 });
 function Update(Id, Name, Percentile) {
-
-    $("#Id").val(Id);
-    $("#Name").val(Name);
+    $("#Id19").val(Id);
+    $("#Name19").val(Name);
     $("#Percentile").val(Percentile);
     baslik = "Yetenek Güncelle";
     $("#staticBackdropLabel").text(baslik);
@@ -44,8 +43,8 @@ $("#update").click(function (e) {
         var formData = new FormData();
 
         // Form alanlarını FormData'ya ekle
-        formData.append("Id", $("#Id").val());
-        formData.append("Name", $("#Name").val());
+        formData.append("Id", $("#Id19").val());
+        formData.append("Name", $("#Name19").val());
         formData.append("Percentile", $("#Percentile").val());
         
 
