@@ -5,6 +5,7 @@ using MyBlog.Entity.DTO.UserDTO;
 using MyBlog.Entity.Entity;
 using MyBlog.Entity.Result;
 using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Policy;
@@ -36,7 +37,7 @@ namespace MyBlog.UI.Controllers
 
         [HttpPost("/Log")]
         public async Task<IActionResult> Log(LoginCrudDTO p)
-            {
+        {
             var jsonData = JsonConvert.SerializeObject(p);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await _httpClient.PostAsync("https://localhost:7200/User/Login", stringContent);
@@ -48,6 +49,13 @@ namespace MyBlog.UI.Controllers
                     var value = JsonConvert.DeserializeObject<UIResponse<LoginGetDTO>>(jsonDataw);
                     HttpContext.Session.SetString("Token", value.Data.Token);
                     HttpContext.Session.SetString("UserName", value.Data.UserName);
+                   
+                    var responseMessage2 = await _httpClient.PostAsync("https://localhost:7200/About/GetOne/1", null);
+                    var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                    var value2 = JsonConvert.DeserializeObject<UIResponse<AboutGetDTO>>(jsonData2);
+                    HttpContext.Session.SetString("NameSurname", value2.Data.NameSurname);
+                    HttpContext.Session.SetString("Photo", value2.Data.Photo);
+
                     var claims = new List<Claim>();
                     claims.Add(new Claim(ClaimTypes.Name, value.Data.UserName)); // Kullanýcý adýný JWT'den alabilirsiniz
                     var userIdentity = new ClaimsIdentity(claims, "login");
@@ -72,8 +80,8 @@ namespace MyBlog.UI.Controllers
         {
             return PartialView();
         }
-		public async Task<PartialViewResult> Contact()
-		{
+        public async Task<PartialViewResult> Contact()
+        {
             return PartialView();
         }
         [HttpPost]
