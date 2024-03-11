@@ -71,7 +71,7 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                
+
                 <div class="navbar-nav align-items-center ms-auto">
                     @await Component.InvokeAsync("Message")
 
@@ -82,9 +82,8 @@
                             <span class="d-none d-lg-inline-flex">@Accessor.HttpContext.Session.GetString("NameSurname")</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a  id="logout" class="dropdown-item " style="cursor:pointer">Log Out</a>
+                            <a style="cursor:pointer;" id="loginModalShow" class="dropdown-item">Giriş Bilgileri</a>
+                            <a id="logout" class="dropdown-item " style="cursor:pointer">Çıkış Yap</a>
                         </div>
                     </div>
                 </div>
@@ -130,6 +129,33 @@
             <div class="container-fluid pt-4 px-4">
                 @RenderBody()
             </div>
+            <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <form id="form">
+                            <div class="modal-header bg-secondary">
+                                <h1 class="modal-title fs-5">Giriş Bilgileri Güncelleme</h1>
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close">X</button>
+                            </div>
+
+                            <div class=" bg-secondary modal-body">
+                                <div class="form-floating mb-3 ">
+                                    <input disabled autocomplete="off" name="UserName" type="text" class="form-control " style="background:black;" id="UserName" placeholder="" value="@Accessor.HttpContext.Session.GetString("UserName")" required>
+                                    <label for="floatingInput">@Accessor.HttpContext.Session.GetString("UserName")</label>
+                                </div>
+                                <div class="form-floating mb-3 ">
+                                    <input autocomplete="off" name="Password" type="password" class="form-control" id="Password" placeholder="Parola" required>
+                                    <label for="floatingInput">Parola</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-secondary">
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">İptal</button>
+                                <button type="button" id="logInfo" class="btn btn-outline-success">Devam</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <!-- Blank End -->
 
 
@@ -168,6 +194,115 @@
                 });
             });
         });
+
+        $("#loginModalShow").click(function (e) {
+            $("#loginModal").modal("show");
+        });
+
+        $("#logInfo").click(function (e) {
+            alert("tıkladın");
+            var formData = new FormData();
+            formData.append("UserName", $("#UserName").val());
+            formData.append("Password", $("#Password").val());
+            $.ajax({
+                type: "POST",
+                url: "/LogInfo",
+                data: formData,
+                processData: false,  // processData ve contentType false olmalı
+                contentType: false,
+                success: function (response) {
+                    var html = "";
+                    if (response.success) {
+                        html += `
+                                                <form id="newPasswordForm">
+                                                            <div class=" bg-secondary modal-body">
+                                                                    <div class="form-floating mb-3 ">
+                                                        <input autocomplete="off" name="UserName" type="text" class="form-control " style="background:black;" id="UserName" placeholder="Kullanıcı Adı"  required>
+                                                        <label for="floatingInput">Kullanıcı Adı</label>
+                                                    </div>
+                                                            <div class="form-floating mb-3 ">
+                                                                <input autocomplete="off" name="Password" type="password" class="form-control" id="Password" placeholder="Parola" required>
+                                                                <label for="floatingInput">Parola</label>
+                                                            </div>
+                                                                                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">İptal</button>
+
+                                                                            <button type="button" id="logupdate" class="btn btn-outline-success">Kaydet</button>
+                                                        </div>
+                                                </form>
+                                            `;
+                        $("#form").html(html);
+                    } else {
+                        Swal.fire({
+                            title: "Hata!",
+                            text:"Kullanıcı Adı Yada Şifre Hatalı!!!",
+                            icon: "error"
+                        });
+                    }
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $(document).on("click", "#logupdate", function () {
+                alert("tıkladın");
+                var formData = new FormData();
+                formData.append("UserName", $("#UserName").val());
+                formData.append("Password", $("#Password").val());
+                $.ajax({
+                    type: "POST",
+                    url: "/LogUpdate",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            Swal.fire({
+                                title: "Hata!",
+                                text: response.message,
+                                icon: "error"
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // AJAX isteği başarısız olduğunda yapılacak işlemler
+                        alert("AJAX isteği başarısız oldu: " + error);
+                    }
+                });
+            });
+        });
+
+
+
+        // $("#logupdate").click(function (e) {
+        //     alert("tıkladın");
+        //     var formData = new FormData();
+        //     formData.append("UserName", $("#UserName").val());
+        //     formData.append("Password", $("#Password").val());
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "/LogUpdate",
+        //         data: formData,
+        //         processData: false,  // processData ve contentType false olmalı
+        //         contentType: false,
+        //         success: function (response) {
+        //             if (response.success) {
+        //                 // Başarılı olduğunda yapılacak işlemler
+        //             } else {
+        //                 Swal.fire({
+        //                     title: "Hata!",
+        //                     text: response.message,
+        //                     icon: "error"
+        //                 });
+        //             }
+        //         },
+        //         error: function (xhr, status, error) {
+        //             // AJAX isteği başarısız olduğunda yapılacak işlemler
+        //             alert("AJAX isteği başarısız oldu: " + error);
+        //         }
+        //     });
+        // });
     </script>
 </body>
 

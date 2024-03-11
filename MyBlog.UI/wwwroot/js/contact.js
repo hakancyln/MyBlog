@@ -50,7 +50,8 @@ function Update1(Id, Name, Mail,Subject,Message,Dates) {
 }
 $("#isRead").click(function (e) {
     location.reload();
-});$("#isRead1").click(function (e) {
+});
+$("#isRead1").click(function (e) {
     location.reload();
 });
 $("#update1").click(function (e) {
