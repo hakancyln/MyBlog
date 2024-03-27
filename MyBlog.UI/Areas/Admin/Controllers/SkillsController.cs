@@ -18,7 +18,7 @@ namespace MyBlog.UI.Areas.Admin.Controllers
         {
         }
 
-        [HttpGet("/Admin/Skills")]
+        [HttpGet("/admin/yeteneklerim")]
         public async Task<IActionResult> Skills()
         {
             UIResponse<IEnumerable<SkillsGetDTO>> data = await GetAllAsync<SkillsGetDTO>(url + "Skills/GetAll");

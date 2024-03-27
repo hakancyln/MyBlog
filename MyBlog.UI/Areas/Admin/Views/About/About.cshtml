@@ -13,7 +13,8 @@
     <div class="bg-secondary rounded h-100 py-4 col-md-6">
         <h6 class="mb-4">Hakkımda</h6>
         <div class="form-floating mb-3 d-flex justify-content-center">
-            <img style="height:150px; width:150px; border-radius:50%;" src="~/images/@Model.Data.Photo" alt="Profil Resmi">
+            <img  style="height:150px; width:150px; border-radius:50%;" src="~/images/@Model.Data.Photo" alt="Profil Resmi">
+            <input hidden name="Photo" type="text" class="form-control" id="Photo" placeholder="Ad Soyad" value="@Model.Data.Photo">
 
         </div>
         <form>
@@ -31,12 +32,12 @@
                 <label for="floatingInput">Alan(ör: Back-end - Front-end)</label>
             </div>
             <div class="form-floating mb-3">
-                <input name="Mail" type="email" class="form-control" id="Mail1" placeholder="Mail" value="@Model.Data.Mail" required>
+                <input name="Mail" type="email" class="form-control" id="Mail12" placeholder="Mail" value="@Model.Data.Mail" required>
                 <label for="floatingInput">Mail Adresi</label>
             </div>
             <div class="mb-3">
                 <label for="formFileSm" class="form-label">Profil Resmi Seç</label>
-                <input name="Photo" class="form-control bg-dark" id="Photo" type="file" value="@Model.Data.Photo">
+                <input name="Photo" class="form-control bg-dark" id="FormFile" type="file" value="@Model.Data.Photo">
             </div>
             <div class="form-floating">
                 <textarea name="Resume" class="form-control" placeholder="Kendini burda tanıt" id="Resume" style="height: 150px;" required>@Model.Data.Resume</textarea>
@@ -85,25 +86,32 @@
 
         // Eğer form geçerliyse
         if (formValid) {
-            var dto = {
-                NameSurname: $("#NameSurname").val(),
-                BirthDate: $("#BirthDate").val(),
-                Job: $("#Job").val(),
-                Mail: $("#Mail1").val(),
-                Photo: $("#Photo").val(),
-                Resume: $("#Resume").val()
-            };
+            var formData = new FormData();
 
+            // Form alanlarını FormData'ya ekle
+            formData.append("NameSurname", $("#NameSurname").val());
+            formData.append("BirthDate", $("#BirthDate").val());
+            formData.append("Job", $("#Job").val());
+            formData.append("Mail", $("#Mail12").val());
+            formData.append("Resume", $("#Resume").val());
+            formData.append("Photo", $("#Photo").val());
+            var file = $("#FormFile")[0].files[0];
+            formData.append("ImageFile", file);
+            
             $.ajax({
                 type: "POST",
                 url: "/UpdateAbout",
-                data: dto,
+                data: formData,
+                processData: false,  // processData ve contentType false olmalı
+                contentType: false,
                 success: function (response) {
                     if (response.success) {
                         Swal.fire({
                             title: "Başarılı!",
                             text: response.responseText,
                             icon: "success"
+                        }).then(function () {
+                            location.reload(); // Sayfanın yenilenmesi
                         });
                     } else {
                         Swal.fire({

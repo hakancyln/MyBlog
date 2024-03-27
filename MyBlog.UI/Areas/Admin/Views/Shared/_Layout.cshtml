@@ -46,16 +46,16 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
-                <a href="/Admin/Contact" class="navbar-brand mx-4 mb-3">
+                <a href="/admin/mesajlar" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>MyBlog</h3>
                 </a>
 
                 <div class="navbar-nav w-100">
-                    <a href="/Admin/Contact" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i>Mesajlar</a>
-                    <a href="/Admin/About" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Hakkımda</a>
-                    <a href="/Admin/Portfolio" class="nav-item nav-link"><i class="fa fa-briefcase me-2"></i>Portföy</a>
-                    <a href="/Admin/Skills" class="nav-item nav-link"><i class="fa fa-star me-2"></i>Yetenekler</a>
-                    <a href="/Admin/Social" class="nav-item nav-link"><i class="fa fa-camera-retro me-2"></i>Sosyal Medya</a>
+                    <a href="/admin/mesajlar" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i>Mesajlar</a>
+                    <a href="/admin/hakkimda" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Hakkımda</a>
+                    <a href="/admin/calismalarim" class="nav-item nav-link"><i class="fa fa-briefcase me-2"></i>Portföy</a>
+                    <a href="/admin/yeteneklerim" class="nav-item nav-link"><i class="fa fa-star me-2"></i>Yetenekler</a>
+                    <a href="/admin/sosyalmedya" class="nav-item nav-link"><i class="fa fa-camera-retro me-2"></i>Sosyal Medya</a>
 
                 </div>
             </nav>
@@ -189,7 +189,7 @@
                     type: "POST",
                     contentType: "application/json",
                     success: function (response) {
-                        window.location.href = '/login';
+                        window.location.href = '/girisyap';
                     }
                 });
             });
@@ -200,7 +200,6 @@
         });
 
         $("#logInfo").click(function (e) {
-            alert("tıkladın");
             var formData = new FormData();
             formData.append("UserName", $("#UserName").val());
             formData.append("Password", $("#Password").val());
@@ -244,7 +243,6 @@
 
         $(document).ready(function () {
             $(document).on("click", "#logupdate", function () {
-                alert("tıkladın");
                 var formData = new FormData();
                 formData.append("UserName", $("#UserName").val());
                 formData.append("Password", $("#Password").val());

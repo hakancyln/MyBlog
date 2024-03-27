@@ -28,7 +28,7 @@ namespace MyBlog.UI.Controllers
         {
             return View();
         }
-        [HttpGet("/Login")]
+        [HttpGet("/girisyap")]
 
         public IActionResult Login()
         {

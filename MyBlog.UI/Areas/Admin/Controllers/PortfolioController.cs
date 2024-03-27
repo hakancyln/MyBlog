@@ -18,7 +18,7 @@ namespace MyBlog.UI.Areas.Admin.Controllers
             _hostingEnvironment = hostingEnvironment;
 
         }
-        [HttpGet("/Admin/Portfolio")]
+        [HttpGet("/admin/calismalarim")]
         public async Task<IActionResult> Portfolio()
         {
             UIResponse<IEnumerable<PortfolioGetDTO>> data = await GetAllAsync<PortfolioGetDTO>(url + "Portfolio/GetAll");

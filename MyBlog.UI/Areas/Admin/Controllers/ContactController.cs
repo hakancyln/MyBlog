@@ -18,7 +18,7 @@ namespace MyBlog.UI.Areas.Admin.Controllers
 
         }
         
-        [HttpGet("/Admin/Contact")]
+        [HttpGet("/admin/mesajlar")]
         public async Task<IActionResult> Contact()
         {
             UIResponse<IEnumerable<ContactGetDTO>> data = await GetAllAsync<ContactGetDTO>(url + "Contact/GetAll");

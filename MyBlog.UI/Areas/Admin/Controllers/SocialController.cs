@@ -20,7 +20,7 @@ namespace MyBlog.UI.Areas.Admin.Controllers
 
         }
 
-        [HttpGet("/Admin/Social")]
+        [HttpGet("/admin/sosyalmedya")]
         public async Task<IActionResult> Social()
         {
             UIResponse<IEnumerable<SocialGetDTO>> data = await GetAllAsync<SocialGetDTO>(url + "Social/GetAll");
