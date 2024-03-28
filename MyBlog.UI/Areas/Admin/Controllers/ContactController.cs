@@ -29,14 +29,28 @@ namespace MyBlog.UI.Areas.Admin.Controllers
         [HttpPost("/CrudContact")]
 		public async Task<IActionResult> CrudContact(ContactCrudDTO p)
 		{
-			var data = await CrudAsync(p, url + "Contact/AddOrUpdate");
+            if (p.Id==0)
+            {
+                var data = await CrudAsync(p, url + "Contact/Add");
 
-			if (data != null)
-			{
-				return Json(new { success = true, responseText = " İşlem Başarılı" });
-			}
-			return Json(new { success = false, responseText = " İşlem Başarısız Oldu!" });
-		}
+                if (data != null)
+                {
+                    return Json(new { success = true, responseText = " İşlem Başarılı" });
+                }
+                return Json(new { success = false, responseText = " İşlem Başarısız Oldu!" });
+            }
+            else
+            {
+                var data = await CrudAsync(p, url + "Contact/Update");
+
+                if (data != null)
+                {
+                    return Json(new { success = true, responseText = " İşlem Başarılı" });
+                }
+                return Json(new { success = false, responseText = " İşlem Başarısız Oldu!" });
+            }
+            
+        }
 
 		[HttpPost("/DeleteContact")]
         public async Task<IActionResult> DeleteContact(int id)

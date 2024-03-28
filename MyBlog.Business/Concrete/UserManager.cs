@@ -56,7 +56,7 @@ namespace MyBlog.Business.Concrete
                         new Claim(ClaimTypes.Name, $"{data.UserName}"),
                         new Claim(ClaimTypes.Sid, data.Id.ToString())
                     }),
-                    Expires = DateTime.Now.AddDays(20), // Token süresi (örn: 20 dakika)
+                    Expires = DateTime.Now.AddMinutes(30), // Token süresi (örn: 20 dakika)
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
                 };
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.Business.Abstract;
 using MyBlog.Entity.DTO.UserDTO;
@@ -25,6 +26,7 @@ namespace MyBlog.API.Controllers
         //	return Ok(value);
         //}
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> GetOne()
         {
             int id = 1;
@@ -43,6 +45,7 @@ namespace MyBlog.API.Controllers
             return BadRequest();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddOrUpdate(UserCrudDTO data)
         {
             data.Id = 1;

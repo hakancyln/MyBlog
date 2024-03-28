@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyBlog.Business.Abstract;
 using MyBlog.Entity.DTO.AboutDTO;
 using MyBlog.Entity.DTO.ContactDTO;
@@ -41,6 +42,7 @@ namespace MyBlog.API.Controllers
 			return Ok(value);
 		}
 		[HttpPost]
+		[Authorize]
 		public async Task<IActionResult> AddOrUpdate(AboutCrudDTO about)
 		{
 			ApiResponse<AboutGetDTO> value;
@@ -53,7 +55,8 @@ namespace MyBlog.API.Controllers
 			return Ok(value);
 		}
 		[HttpPost]
-		public async Task<IActionResult> Remove(int id)
+        [Authorize]
+        public async Task<IActionResult> Remove(int id)
 		{
 
 			var value = await _service.RemoveAsync(id);

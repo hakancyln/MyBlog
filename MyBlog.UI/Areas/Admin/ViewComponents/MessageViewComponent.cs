@@ -22,6 +22,7 @@ namespace MyBlog.UI.Areas.Admin.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
             var responseMessage = await _httpClient.PostAsync("https://localhost:7200/Contact/GetAll", null);
 
             if (responseMessage.IsSuccessStatusCode)

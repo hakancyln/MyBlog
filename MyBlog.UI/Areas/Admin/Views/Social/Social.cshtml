@@ -65,7 +65,7 @@
             {
                 <tr id="@item.Id">
                     <td>@item.Name</td>
-                    <td><a href="@item.Url">@item.Url</a></td>
+                    <td><a target="blank" href="@item.Url">@item.Url</a></td>
                     <td><img height="40" width="40" src="~/images/@item.Image" /></td>
                     <td>
                         <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" id="guncelle" onclick="Update('@item.Id','@item.Name','@item.Image','@item.Url')">Güncelle</button>

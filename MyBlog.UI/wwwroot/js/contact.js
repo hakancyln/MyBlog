@@ -14,7 +14,7 @@ $("#ekle1").click(function (e) {
 
     $('#staticBackdropMessage1').modal("show");
 });
-function Update1(Id, Name, Mail,Subject,Message,Dates) {
+function CUpdate(Id, Name, Mail,Subject,Message,Dates) {
 
     $("#Id").val(Id);
     $("#Name").val(Name);
@@ -73,6 +73,18 @@ $("#update1").click(function (e) {
         }
     });
 
+    // Email alanını kontrol et
+    var emailValue = $("#Mail").val();
+    if (!emailValue || !validateEmail(emailValue)) {
+        formValid = false; // Form geçersiz
+        $("#Mail").addClass("is-invalid"); // Hata göstergesi ekle
+        $("#Mail").siblings(".invalid-feedback").remove(); // Var olan hata mesajını kaldır
+        $("#Mail").after('<div class="invalid-feedback" style="color:darkred;">Geçerli bir email adresi girin.</div>'); // Yeni hata mesajı ekle
+    } else {
+        $("#Mail").removeClass("is-invalid"); // Hata göstergesini kaldır
+        $("#Mail").siblings(".invalid-feedback").remove(); // Hata mesajını kaldır
+    }
+
     // Eğer form geçerliyse
     if (formValid) {
         var formData = new FormData();
@@ -85,7 +97,6 @@ $("#update1").click(function (e) {
         formData.append("Message", $("#Message").val());
         formData.append("Date", $("#Date").text());
         formData.append("IsRead", false);
-        
 
         $.ajax({
             type: "POST",
@@ -119,6 +130,13 @@ $("#update1").click(function (e) {
         });
     }
 });
+
+// Email adresinin geçerliliğini kontrol eden fonksiyon
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
 function confirmDelete1(id) {
     // Swal onay iletişim kutusu gösterme
     Swal.fire({

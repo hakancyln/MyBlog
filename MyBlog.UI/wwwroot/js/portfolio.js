@@ -1,13 +1,13 @@
 ﻿
 var baslik = "";
 $("#ekle").click(function (e) {
-    $("#Id").val("");
-    $("#Name1").val(""); 
-    $("#Description1").val("");
-    $("#Url1").val(""); 
-    $("#Image2").val("");
-    $("#Image1").attr("src", "");
-    $("#Image").val("");
+    $("#PId").val("");
+    $("#PName").val(""); 
+    $("#PDescription").val("");
+    $("#PUrl").val(""); 
+    $("#PImage2").val("");
+    $("#PImage1").attr("src", "");
+    $("#PImage").val("");
 
     var baslik = "Çalışma Ekle";
 
@@ -17,13 +17,13 @@ $("#ekle").click(function (e) {
 });
 function Update(Id, Name, Description, Url, Image) {
 
-    $("#Id").val(Id);
-    $("#Name1").val(Name);
-    $("#Description1").val(Description);
-    $("#Url1").val(Url);
-    $("#Image").val(Image);
+    $("#PId").val(Id);
+    $("#PName").val(Name);
+    $("#PDescription").val(Description);
+    $("#PUrl").val(Url);
+    $("#PImage").val(Image);
     var fullImagePath = '/images/portfolio/' + Image;
-    $("#Image1").attr("src", fullImagePath);
+    $("#PImage1").attr("src", fullImagePath);
     baslik = "Çalışma Güncelle";
     $("#staticBackdropLabel").text(baslik);
     $("#staticBackdropUpdate").modal("show");
@@ -52,14 +52,14 @@ $("#update").click(function (e) {
         var formData = new FormData();
 
         // Form alanlarını FormData'ya ekle
-        formData.append("Id", $("#Id").val());
-        formData.append("Name", $("#Name1").val());
-        formData.append("Description", $("#Description1").val());
-        formData.append("Url", $("#Url1").val());
-        formData.append("Image", $("#Image").val());
+        formData.append("Id", $("#PId").val());
+        formData.append("Name", $("#PName").val());
+        formData.append("Description", $("#PDescription").val());
+        formData.append("Url", $("#PUrl").val());
+        formData.append("Image", $("#PImage").val());
 
         // Dosyayı da FormData'ya ekle
-        var file = $("#Image2")[0].files[0];
+        var file = $("#PImage2")[0].files[0];
         formData.append("ImageFile", file);
 
         $.ajax({
@@ -137,4 +137,9 @@ function confirmDelete(id) {
     });
 }
 
-
+function girilenVeriyiGoster() {
+    // Textarea içine girilen veriyi al
+    var textareaIcerigi = document.getElementById("veriGirisi").value;
+    // Alınan veriyi uygun bir div içine yerleştirerek HTML olarak işle
+    document.getElementById("gosterilenVeri").innerHTML = textareaIcerigi;
+}

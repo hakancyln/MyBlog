@@ -1010,6 +1010,11 @@ button::-moz-focus-inner, input::-moz-focus-inner {
  *
  * ------------------------------------------------------------------- 
  */
+
+::placeholder{
+	color:#151515 !important;
+}
+
 .grey-section {
 	background: #ebebeb;
 }
@@ -1026,7 +1031,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 .section-intro h1 {
 	font-size: 3.6rem;
-	color: #313131;
+	color: white;
 	line-height: 1.25;
 	margin-bottom: 1.2rem;
 }
@@ -1771,7 +1776,7 @@ header .logo a {
  * ------------------------------------------------------------------- 
  */
 #portfolio {
-	background: #FFFFFF;
+	background: #151515;
 	padding-top: 12rem;
 	padding-bottom: 12rem;
 }
@@ -1932,7 +1937,7 @@ header .logo a {
 	border-right: 1px solid rgba(200, 200, 200, 0.1);
 }
 .popup-modal .link-box a:hover {
-	background: #cc005f;
+	background: darkred;
 	border: none;
 }
 @media only screen and (max-width:600px) {
@@ -2225,18 +2230,18 @@ header .logo a {
  * ------------------------------------------------------------------- 
  */
 #contact {
-	background: #151515;
+	background: #ffffff;
 	padding-top: 12rem;
 	padding-bottom: 7.2rem;
 }
 #contact .section-intro h1 {
-	color: white;
+	color: #151515;
 }
 #contact .section-intro h5 {
 	color: darkred;
 }
 #contact .section-intro p {
-	color: rgba(255, 255, 255, 0.7);
+	color: #656262;
 }
 
 /* contact form */
@@ -2302,10 +2307,10 @@ header .logo a {
 #contact input[type="email"],
 #contact textarea {
 	width: 100%;
-	color: rgba(255, 255, 255, 0.7);
+	color: #151515;
 	margin-bottom: 0;
 	border: none;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-bottom: 2px solid #151515;
 }
 #contact input[type="text"],
 #contact input[type="password"],
@@ -2317,7 +2322,7 @@ header .logo a {
 #contact input[type="password"]:focus,
 #contact input[type="email"]:focus {
 	border-color: darkred;
-	color: #FFFFFF;
+	color: #151515;
 }
 #contact textarea {
 	min-height: 20rem;

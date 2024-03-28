@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.Business.Abstract;
 using MyBlog.Entity.DTO.SocialDTO;
@@ -25,6 +26,7 @@ namespace MyBlog.API.Controllers
 			return Ok(value);
 		}
         [HttpPost("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetOne(int id)
 		{
 			var deneme = new SocialGetDTO();
@@ -33,7 +35,8 @@ namespace MyBlog.API.Controllers
 			return Ok(value);
 		}
 		[HttpPost]
-		public async Task<IActionResult> AddOrUpdate(SocialCrudDTO about)
+        [Authorize]
+        public async Task<IActionResult> AddOrUpdate(SocialCrudDTO about)
 		{
 			ApiResponse<SocialGetDTO> value;
 			if (about.Id == 0)
@@ -45,7 +48,8 @@ namespace MyBlog.API.Controllers
 			return Ok(value);
 		}
 		[HttpPost("{id}")]
-		public async Task<IActionResult> Remove(int id)
+        [Authorize]
+        public async Task<IActionResult> Remove(int id)
 		{
 
 			var value = await _service.RemoveAsync(id);

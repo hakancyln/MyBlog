@@ -19,7 +19,6 @@ namespace MyBlog.API.Controllers
 		{
 			_service = service;
 		}
-        [AllowAnonymous]
         [HttpPost]
 		public async Task<IActionResult> GetAll()
 		{
@@ -37,17 +36,18 @@ namespace MyBlog.API.Controllers
 		
 		[AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> AddOrUpdate(ContactCrudDTO about)
+        public async Task<IActionResult> Add(ContactCrudDTO about)
 		{
-			ApiResponse<ContactGetDTO> value;
-			if (about.Id == 0)
-			{
-				value = await _service.AddAsync(about);
+				var value = await _service.AddAsync(about);
 				return Ok(value);
-			}
-			value = await _service.UpdateAsync(about);
-			return Ok(value);
 		}
+        [HttpPost]
+        public async Task<IActionResult> Update(ContactCrudDTO about)
+        {
+
+            var value = await _service.UpdateAsync(about);
+            return Ok(value);
+        }
         [HttpPost("{id}")]
         public async Task<IActionResult> Remove(int id)
 		{

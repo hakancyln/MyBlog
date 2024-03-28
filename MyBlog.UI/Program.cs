@@ -19,7 +19,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(20);
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -59,6 +59,7 @@ app.UseAuthorization(); // Yetkilendirme middleware'ini ekleyin (UseAuthenticati
 
 app.UseSession();
 app.UseMiddleware<LoginCheckMiddleware>(); // Özel yetkilendirme middleware'ini ekleyin
+app.UseMiddleware<SessionMiddleware>(); // Özel yetkilendirme middleware'ini ekleyin
 
 app.UseEndpoints(endpoints =>
 {
