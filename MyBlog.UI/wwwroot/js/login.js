@@ -1,15 +1,13 @@
 ﻿$("#update").click(function (e) {
-    e.preventDefault(); // Form submitini engelle
+    e.preventDefault();
     var formData = new FormData();
-
-    // Form alanlarını FormData'ya ekle
     formData.append("UserName", $("#UserName").val());
     formData.append("Password", $("#Password").val());
     $.ajax({
         type: "POST",
         url: "/Log",
         data: formData,
-        processData: false,  // processData ve contentType false olmalı
+        processData: false,
         contentType: false,
         success: function (response) {
 

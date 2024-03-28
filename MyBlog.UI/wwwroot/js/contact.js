@@ -27,8 +27,6 @@ function CUpdate(Id, Name, Mail,Subject,Message,Dates) {
     $("#staticBackdropMessage").modal("show");
 
     var formData = new FormData();
-
-    // Form alanlarını FormData'ya ekle
     formData.append("Id", $("#Id").val());
     formData.append("Name", $("#Name").val());
     formData.append("Mail", $("#Mail").val());
@@ -42,7 +40,7 @@ function CUpdate(Id, Name, Mail,Subject,Message,Dates) {
         type: "POST",
         url: "/CrudContact",
         data: formData,
-        processData: false,  // processData ve contentType false olmalı
+        processData: false,
         contentType: false
 
     });
@@ -55,41 +53,32 @@ $("#isRead1").click(function (e) {
     location.reload();
 });
 $("#update1").click(function (e) {
-    e.preventDefault(); // Form submitini engelle
+    e.preventDefault();
 
-    var formValid = true; // Form geçerliliği kontrolü
-
-    // Her form elemanını kontrol et
+    var formValid = true;
     $("form input[required], form textarea[required]").each(function () {
-        // Eğer boşsa
         if (!$(this).val()) {
-            formValid = false; // Form geçersiz
-            $(this).addClass("is-invalid"); // Hata göstergesi ekle
-            $(this).siblings(".invalid-feedback").remove(); // Var olan hata mesajını kaldır
-            $(this).after('<div class="invalid-feedback" style="color:darkred;">Bu alan boş bırakılamaz.</div>'); // Yeni hata mesajı ekle
+            formValid = false;
+            $(this).addClass("is-invalid");
+            $(this).siblings(".invalid-feedback").remove();
+            $(this).after('<div class="invalid-feedback" style="color:darkred;">Bu alan boş bırakılamaz.</div>');
         } else {
-            $(this).removeClass("is-invalid"); // Hata göstergesini kaldır
-            $(this).siblings(".invalid-feedback").remove(); // Hata mesajını kaldır
+            $(this).removeClass("is-invalid");
+            $(this).siblings(".invalid-feedback").remove();
         }
     });
-
-    // Email alanını kontrol et
     var emailValue = $("#Mail").val();
     if (!emailValue || !validateEmail(emailValue)) {
-        formValid = false; // Form geçersiz
-        $("#Mail").addClass("is-invalid"); // Hata göstergesi ekle
-        $("#Mail").siblings(".invalid-feedback").remove(); // Var olan hata mesajını kaldır
-        $("#Mail").after('<div class="invalid-feedback" style="color:darkred;">Geçerli bir email adresi girin.</div>'); // Yeni hata mesajı ekle
+        formValid = false;
+        $("#Mail").addClass("is-invalid");
+        $("#Mail").siblings(".invalid-feedback").remove();
+        $("#Mail").after('<div class="invalid-feedback" style="color:darkred;">Geçerli bir email adresi girin.</div>');
     } else {
-        $("#Mail").removeClass("is-invalid"); // Hata göstergesini kaldır
-        $("#Mail").siblings(".invalid-feedback").remove(); // Hata mesajını kaldır
+        $("#Mail").removeClass("is-invalid");
+        $("#Mail").siblings(".invalid-feedback").remove();
     }
-
-    // Eğer form geçerliyse
     if (formValid) {
         var formData = new FormData();
-
-        // Form alanlarını FormData'ya ekle
         formData.append("Id", $("#Id").val());
         formData.append("Name", $("#Name").val());
         formData.append("Mail", $("#Mail").val());
@@ -102,7 +91,7 @@ $("#update1").click(function (e) {
             type: "POST",
             url: "/CrudContact",
             data: formData,
-            processData: false,  // processData ve contentType false olmalı
+            processData: false,
             contentType: false,
             success: function (response) {
                 if (response.success) {
@@ -130,15 +119,12 @@ $("#update1").click(function (e) {
         });
     }
 });
-
-// Email adresinin geçerliliğini kontrol eden fonksiyon
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
 
 function confirmDelete1(id) {
-    // Swal onay iletişim kutusu gösterme
     Swal.fire({
         title: "Emin misiniz?",
         text: "Bu öğeyi silmek istediğinizden emin misiniz?",
@@ -149,28 +135,22 @@ function confirmDelete1(id) {
         confirmButtonText: "Evet, sil",
         cancelButtonText: "İptal"
     }).then((result) => {
-        // Kullanıcı onaylarsa silme işlemini gerçekleştirme
         if (result.isConfirmed) {
-            // AJAX kullanarak silme işlemini gerçekleştirme
             $.ajax({
                 type: "POST",
                 data: { id: id },
                 url: "/DeleteContact",
                 success: function (response) {
-                    // Başarılı bir şekilde silindiyse
                     if (response.success) {
-                        // Swal ile başarılı iletişim kutusu gösterme
                         Swal.fire({
                             title: "Başarılı!",
                             text: "Öğe başarıyla silindi.",
                             icon: "success"
                         }).then(function () {
-                            // Sayfayı yenileme
                             location.reload();
 
                         });
                     } else {
-                        // Swal ile hata iletişim kutusu gösterme
                         Swal.fire({
                             title: "Hata!",
                             text: response.message,

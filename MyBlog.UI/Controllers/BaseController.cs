@@ -33,26 +33,6 @@ namespace MyBlog.UI.Controllers
 
 			return null;
 		}
-		//protected async Task<UIResponse<T>> AddAsync<T>(T p, string url) where T : class
-		//{
-		//	_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
-		//	var jsonData = JsonConvert.SerializeObject(p);
-		//	StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-		//	var responseMessage = await _httpClient.PostAsync(url, stringContent);
-
-		//	if (responseMessage.IsSuccessStatusCode)
-		//	{
-
-		//		var jsonDataw = await responseMessage.Content.ReadAsStringAsync();
-		//		var value = JsonConvert.DeserializeObject<UIResponse<T>>(jsonDataw);
-		//		_httpClient.DefaultRequestHeaders.Remove("Authorization");
-		//		return value;
-		//	}
-		//	var jsonDataw2 = await responseMessage.Content.ReadAsStringAsync();
-		//	var value2 = JsonConvert.DeserializeObject<UIResponse<T>>(jsonDataw2);
-		//	_httpClient.DefaultRequestHeaders.Remove("Authorization");
-		//	return value2;
-		//}
 		protected async Task<bool> DeleteAsync(string url)
 		{
 			_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));

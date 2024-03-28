@@ -183,7 +183,6 @@
     <script>
         $(document).ready(function () {
             $("#logout").click(function () {
-                // AJAX POST isteği gönder
                 $.ajax({
                     url: "/Logout",
                     type: "POST",
@@ -207,7 +206,7 @@
                 type: "POST",
                 url: "/LogInfo",
                 data: formData,
-                processData: false,  // processData ve contentType false olmalı
+                processData: false,
                 contentType: false,
                 success: function (response) {
                     var html = "";
@@ -264,43 +263,11 @@
                         }
                     },
                     error: function (xhr, status, error) {
-                        // AJAX isteği başarısız olduğunda yapılacak işlemler
                         alert("AJAX isteği başarısız oldu: " + error);
                     }
                 });
             });
         });
-
-
-
-        // $("#logupdate").click(function (e) {
-        //     alert("tıkladın");
-        //     var formData = new FormData();
-        //     formData.append("UserName", $("#UserName").val());
-        //     formData.append("Password", $("#Password").val());
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "/LogUpdate",
-        //         data: formData,
-        //         processData: false,  // processData ve contentType false olmalı
-        //         contentType: false,
-        //         success: function (response) {
-        //             if (response.success) {
-        //                 // Başarılı olduğunda yapılacak işlemler
-        //             } else {
-        //                 Swal.fire({
-        //                     title: "Hata!",
-        //                     text: response.message,
-        //                     icon: "error"
-        //                 });
-        //             }
-        //         },
-        //         error: function (xhr, status, error) {
-        //             // AJAX isteği başarısız olduğunda yapılacak işlemler
-        //             alert("AJAX isteği başarısız oldu: " + error);
-        //         }
-        //     });
-        // });
     </script>
 </body>
 

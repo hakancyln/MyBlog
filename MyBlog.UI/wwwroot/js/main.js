@@ -7,43 +7,20 @@
 
 (function($) {
 
-	"use strict";
-
-	/*---------------------------------------------------- */
-	/* Preloader
-	------------------------------------------------------ */ 
+	"use strict"; 
    $(window).load(function() {
-
-      // will first fade out the loading animation 
     	$("#loader").fadeOut("slow", function(){
-
-        // will fade out the whole DIV that covers the website.
         $("#preloader").delay(300).fadeOut("slow");
 
       });       
 
   	})
-
-
-  	/*---------------------------------------------------- */
-  	/* FitText Settings
-  	------------------------------------------------------ */
   	setTimeout(function() {
 
    	$('#intro h1').fitText(1, { minFontSize: '42px', maxFontSize: '84px' });
 
-  	}, 100);
-
-
-	/*---------------------------------------------------- */
-	/* FitVids
-	------------------------------------------------------ */ 
-  	$(".fluid-video-wrapper").fitVids();
-
-
-	/*---------------------------------------------------- */
-	/* Owl Carousel
-	------------------------------------------------------ */ 
+  	}, 100); 
+  	$(".fluid-video-wrapper").fitVids(); 
 	$("#owl-slider").owlCarousel({
         navigation: false,
         pagination: true,
@@ -54,19 +31,9 @@
 	     ],
         navigationText: false
     });
-
-
-	/*----------------------------------------------------- */
-	/* Alert Boxes
-  	------------------------------------------------------- */
 	$('.alert-box').on('click', '.close', function() {
 	  $(this).parent().fadeOut(500);
-	});	
-
-
-	/*----------------------------------------------------- */
-	/* Stat Counter
-  	------------------------------------------------------- */
+	});
    var statSection = $("#stats"),
        stats = $(".stat-count");
 
@@ -88,21 +55,14 @@
 				  	});
 				});
 
-       	} 
-
-       	// trigger once only
+       	}
        	this.destroy();      	
 
 		},
 			
 		offset: "90%"
 	
-	});	
-
-
-	/*---------------------------------------------------- */
-	/*	Masonry
-	------------------------------------------------------ */
+	});
 	var containerProjects = $('#folio-wrapper');
 
 	containerProjects.imagesLoaded( function() {
@@ -113,11 +73,6 @@
 		});
 
 	});
-
-
-	/*----------------------------------------------------*/
-	/*	Modal Popup
-	------------------------------------------------------*/
    $('.item-wrap a').magnificPopup({
 
       type:'inline',
@@ -131,16 +86,9 @@
    $(document).on('click', '.popup-modal-dismiss', function (e) {
    	e.preventDefault();
    	$.magnificPopup.close();
-   });
-
-	
-	/*-----------------------------------------------------*/
-  	/* Navigation Menu
-   ------------------------------------------------------ */  
+   });  
    var toggleButton = $('.menu-toggle'),
        nav = $('.main-navigation');
-
-   // toggle button
    toggleButton.on('click', function(e) {
 
 		e.preventDefault();
@@ -148,21 +96,11 @@
 		nav.slideToggle();
 
 	});
-
-   // nav items
-  	nav.find('li a').on("click", function() {   
-
-   	// update the toggle button 		
-   	toggleButton.toggleClass('is-clicked'); 
-   	// fadeout the navigation panel
+  	nav.find('li a').on("click", function() {
+   	toggleButton.toggleClass('is-clicked');
    	nav.fadeOut();   		
    	     
   	});
-
-
-   /*---------------------------------------------------- */
-  	/* Highlight the current section in the navigation bar
-  	------------------------------------------------------ */
 	var sections = $("section"),
 	navigation_links = $("#main-nav-wrap li a");	
 
@@ -185,11 +123,6 @@
 
 		offset: '25%'
 	});
-
-
-	/*---------------------------------------------------- */
-  	/* Smooth Scrolling
-  	------------------------------------------------------ */
   	$('.smoothscroll').on('click', function (e) {
 	 	
 	 	e.preventDefault();
@@ -203,23 +136,9 @@
       	window.location.hash = target;
       });
 
-  	});  
-  
-
-   /*---------------------------------------------------- */
-	/*  Placeholder Plugin Settings
-	------------------------------------------------------ */ 
-	$('input, textarea, select').placeholder()  
-
-
-  	/*---------------------------------------------------- */
-	/*	contact form
-	------------------------------------------------------ */
-
-	/* local validation */
+  	}); 
+	$('input, textarea, select').placeholder()
 	$('#contactForm').validate({
-
-		/* submit via ajax */
 		submitHandler: function(form) {
 
 			var sLoader = $('#submit-loader');
@@ -235,8 +154,6 @@
 
 		      },
 		      success: function(msg) {
-
-	            // Message was sent
 	            if (msg == 'OK') {
 					sLoader.fadeOut();
 					$('#message-warning').hide();
@@ -252,7 +169,6 @@
 					}, 10000);
 	               
 	            }
-	            // There was an error
 	            else {
 	            	sLoader.fadeOut(); 
 	               $('#message-warning').html(msg);
@@ -271,18 +187,11 @@
 	      });     		
   		}
 
-	});
-
-
- 	/*----------------------------------------------------- */
-  	/* Back to top
-   ------------------------------------------------------- */ 
-	var pxShow = 300; // height on which the button will show
-	var fadeInTime = 400; // how slow/fast you want the button to show
-	var fadeOutTime = 400; // how slow/fast you want the button to hide
-	var scrollSpeed = 300; // how slow/fast you want the button to scroll to top. can be a value, 'slow', 'normal' or 'fast'
-
-   // Show or hide the sticky footer button
+	}); 
+	var pxShow = 300;
+	var fadeInTime = 400;
+	var fadeOutTime = 400;
+	var scrollSpeed = 300;
 	jQuery(window).scroll(function() {
 
 		if (!( $("#header-search").hasClass('is-visible'))) {

@@ -17,14 +17,12 @@ namespace MyBlog.UI.ViewComponents
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			//_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
 			var responseMessage = await _httpClient.PostAsync("https://localhost:7200/Portfolio/GetAll", null);
 
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
 				var value = JsonConvert.DeserializeObject<UIResponse<IEnumerable<PortfolioGetDTO>>>(jsonData);
-				//_httpClient.DefaultRequestHeaders.Remove("Authorization");
 				return View(value);
 			}
 

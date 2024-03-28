@@ -57,7 +57,7 @@ namespace MyBlog.UI.Controllers
                     HttpContext.Session.SetString("Photo", value2.Data.Photo);
 
                     var claims = new List<Claim>();
-                    claims.Add(new Claim(ClaimTypes.Name, value.Data.UserName)); // Kullanýcý adýný JWT'den alabilirsiniz
+                    claims.Add(new Claim(ClaimTypes.Name, value.Data.UserName));
                     var userIdentity = new ClaimsIdentity(claims, "login");
 
                     ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);

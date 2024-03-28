@@ -20,29 +20,22 @@ function Update(Id, Name, Percentile) {
     $("#staticBackdropUpdate").modal("show");
 }
 $("#update").click(function (e) {
-    e.preventDefault(); // Form submitini engelle
+    e.preventDefault();
 
-    var formValid = true; // Form geçerliliği kontrolü
-
-    // Her form elemanını kontrol et
+    var formValid = true;
     $("form input[required], form textarea[required]").each(function () {
-        // Eğer boşsa
         if (!$(this).val()) {
-            formValid = false; // Form geçersiz
-            $(this).addClass("is-invalid"); // Hata göstergesi ekle
-            $(this).siblings(".invalid-feedback").remove(); // Var olan hata mesajını kaldır
-            $(this).after('<div class="invalid-feedback">Bu alan boş bırakılamaz.</div>'); // Yeni hata mesajı ekle
+            formValid = false;
+            $(this).addClass("is-invalid");
+            $(this).siblings(".invalid-feedback").remove();
+            $(this).after('<div class="invalid-feedback">Bu alan boş bırakılamaz.</div>');
         } else {
-            $(this).removeClass("is-invalid"); // Hata göstergesini kaldır
-            $(this).siblings(".invalid-feedback").remove(); // Hata mesajını kaldır
+            $(this).removeClass("is-invalid");
+            $(this).siblings(".invalid-feedback").remove();
         }
     });
-
-    // Eğer form geçerliyse
     if (formValid) {
         var formData = new FormData();
-
-        // Form alanlarını FormData'ya ekle
         formData.append("Id", $("#Id19").val());
         formData.append("Name", $("#Name19").val());
         formData.append("Percentile", $("#Percentile").val());
@@ -52,7 +45,7 @@ $("#update").click(function (e) {
             type: "POST",
             url: "/CrudSkills",
             data: formData,
-            processData: false,  // processData ve contentType false olmalı
+            processData: false,
             contentType: false,
             success: function (response) {
                 if (response.success) {
@@ -78,7 +71,6 @@ $("#update").click(function (e) {
     }
 });
 function confirmDelete(id) {
-    // Swal onay iletişim kutusu gösterme
     Swal.fire({
         title: "Emin misiniz?",
         text: "Bu öğeyi silmek istediğinizden emin misiniz?",
@@ -89,28 +81,22 @@ function confirmDelete(id) {
         confirmButtonText: "Evet, sil",
         cancelButtonText: "İptal"
     }).then((result) => {
-        // Kullanıcı onaylarsa silme işlemini gerçekleştirme
         if (result.isConfirmed) {
-            // AJAX kullanarak silme işlemini gerçekleştirme
             $.ajax({
                 type: "POST",
                 data: { id: id },
                 url: "/DeleteSkills",
                 success: function (response) {
-                    // Başarılı bir şekilde silindiyse
                     if (response.success) {
-                        // Swal ile başarılı iletişim kutusu gösterme
                         Swal.fire({
                             title: "Başarılı!",
                             text: "Öğe başarıyla silindi.",
                             icon: "success"
                         }).then(function () {
-                            // Sayfayı yenileme
                             location.reload();
 
                         });
                     } else {
-                        // Swal ile hata iletişim kutusu gösterme
                         Swal.fire({
                             title: "Hata!",
                             text: response.message,

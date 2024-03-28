@@ -18,7 +18,6 @@ namespace MyBlog.UI.ViewComponents
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			//_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
 			var responseMessage = await _httpClient.PostAsync("https://localhost:7200/About/GetOne/1", null);
 			var responseMessage2 = await _httpClient.PostAsync("https://localhost:7200/Social/GetAll", null);
 
@@ -31,7 +30,6 @@ namespace MyBlog.UI.ViewComponents
 				IntroModel model = new IntroModel();
 				model.Social = value2;
 				model.About = value;
-				//_httpClient.DefaultRequestHeaders.Remove("Authorization");
 				return View(model);
 			}
 

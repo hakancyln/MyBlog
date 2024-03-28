@@ -13,13 +13,6 @@
  *
  * =================================================================== 
  */
-
-/** 
- * ===================================================================
- * 01. reset - normalize.css v3.0.2 | MIT License | git.io/normalize
- *
- * ------------------------------------------------------------------- 
- */
 html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
@@ -239,13 +232,6 @@ td,
 th {
 	padding: 0;
 }
-
-/** 
- * ===================================================================
- * 02. basic/base setup styles - (_basic.scss)
- *
- * ------------------------------------------------------------------- 
- */
 html {
 	font-size: 62.5%;
 	box-sizing: border-box;
@@ -272,21 +258,11 @@ button {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 }
-
-/**
- * Media - (_basic.scss)
- * ------------------------------------------------------------------- 
- */
 img,
 video {
 	max-width: 100%;
 	height: auto;
 }
-
-/**
- * Typography resets - (_basic.scss)
- * ------------------------------------------------------------------- 
- */
 div,
 dl,
 dt,
@@ -347,11 +323,6 @@ ul {
 li {
 	display: block;
 }
-
-/**
- * links - (_basic.scss)
- * ------------------------------------------------------------------- 
- */
 a {
 	text-decoration: none;
 	line-height: inherit;
@@ -360,11 +331,6 @@ a {
 a img {
 	border: none;
 }
-
-/**
- * inputs - (_basic.scss)
- * ------------------------------------------------------------------- 
- */
 fieldset {
 	margin: 0;
 	padding: 0;
@@ -384,13 +350,6 @@ textarea {
 	-o-appearance: none;
 	appearance: none;
 }
-
-/** 
- * ===================================================================
- * 03. grid - (_grid.scss)
- *
- * ------------------------------------------------------------------- 
- */
 .row {
 	width: 94%;
 	max-width: 1140px;
@@ -482,11 +441,6 @@ textarea {
 .col-full {
 	width: 100%;
 }
-
-/**
- * small screens - (_grid.scss)
- * --------------------------------------------------------------- 
- */
 @media screen and (max-width:1024px) {
 	.row .row {
 		margin-left: -18px;
@@ -498,11 +452,6 @@ textarea {
 	}
 
 }
-
-/**
- * tablets - (_grid.scss)
- * --------------------------------------------------------------- 
- */
 @media screen and (max-width:768px) {
 	.row {
 		width: auto;
@@ -546,11 +495,6 @@ textarea {
 	}
 
 }
-
-/**
- * large mobile devices - (_grid.scss)
- * --------------------------------------------------------------- 
- */
 @media screen and (max-width:600px) {
 	.row {
 		padding-left: 25px;
@@ -583,11 +527,6 @@ textarea {
 	}
 
 }
-
-/**
- * small mobile devices - (_grid.scss)
- * --------------------------------------------------------------- 
- */
 @media screen and (max-width:400px) {
 	.row .row {
 		padding-left: 0;
@@ -610,13 +549,6 @@ textarea {
 	}
 
 }
-
-/** 
- * ===================================================================
- * block grids - (_grid.scss)
- *
- * ------------------------------------------------------------------- 
- */
 [class*="block-"]:before,
 [class*="block-"]:after {
 	content: "";
@@ -642,22 +574,12 @@ textarea {
 .block-1-2 .bgrid {
 	width: 50%;
 }
-
-/**
- * Clearing for block grid columns. Allow columns with 
- * different heights to align properly.
- */
 .block-1-6 .bgrid:nth-child(6n+1),
 .block-1-4 .bgrid:nth-child(4n+1),
 .block-1-3 .bgrid:nth-child(3n+1),
 .block-1-2 .bgrid:nth-child(2n+1) {
 	clear: both;
 }
-
-/**
- * small screens - (_grid.scss)
- * --------------------------------------------------------------- 
- */
 @media screen and (max-width:1024px) {
 	.block-s-1-6 .bgrid {
 		width: 16.66667%;
@@ -692,11 +614,6 @@ textarea {
 	}
 
 }
-
-/**
- * tablets - (_grid.scss)
- * --------------------------------------------------------------- 
- */
 @media screen and (max-width:768px) {
 	.block-tab-1-6 .bgrid {
 		width: 16.66667%;
@@ -731,11 +648,6 @@ textarea {
 	}
 
 }
-
-/**
- * large mobile devices - (_grid.scss)
- * --------------------------------------------------------------- 
- */
 @media screen and (max-width:600px) {
 	.block-mob-1-6 .bgrid {
 		width: 16.66667%;
@@ -770,11 +682,6 @@ textarea {
 	}
 
 }
-
-/**
- * stack on small mobile devices - (_grid.scss)
- * --------------------------------------------------------------- 
- */
 @media screen and (max-width:400px) {
 	.stack .bgrid {
 		width: 100% !important;
@@ -785,17 +692,6 @@ textarea {
 	}
 
 }
-
-/** 
- * ===================================================================
- * 04. MISC  - (_grid.scss)
- *
- * ------------------------------------------------------------------- 
- */
-
-/**
- * Clearing - (http://nicolasgallagher.com/micro-clearfix-hack/
- */
 .group:before,
 .group:after {
 	content: "";
@@ -805,10 +701,6 @@ textarea {
 .group:after {
 	clear: both;
 }
-
-/**
- * Misc Helper Styles 
- */
 .hide {
 	display: none;
 }
@@ -867,5 +759,3 @@ textarea {
 	margin-right: auto;
 	text-align: center;
 }
-
-/*# sourceMappingURL=base.css.map */

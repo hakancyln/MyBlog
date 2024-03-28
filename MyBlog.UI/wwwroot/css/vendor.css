@@ -11,13 +11,6 @@
  *
  * =================================================================== 
  */
-
-/* 
- *  01. Core Owl Carousel CSS File
- *	 v1.3.3
- */
-
-/* clearfix */
 .owl-carousel .owl-wrapper:after {
 	content: ".";
 	display: block;
@@ -26,8 +19,6 @@
 	line-height: 0;
 	height: 0;
 }
-
-/* display none until init */
 .owl-carousel {
 	display: none;
 	position: relative;
@@ -65,13 +56,9 @@
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
 }
-
-/* mouse grab icon */
 .grabbing {
 	cursor: url(grabbing.png) 8 8, move;
 }
-
-/* fix */
 .owl-carousel .owl-wrapper, .owl-carousel .owl-item {
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
@@ -80,11 +67,6 @@
 	-moz-transform: translate3d(0, 0, 0);
 	-ms-transform: translate3d(0, 0, 0);
 }
-
-/* 
- *  Owl Carousel CSS3 Transitions 
- *  v1.3.2
- */
 .owl-origin {
 	-webkit-perspective: 1200px;
 	-webkit-perspective-origin-x: 50%;
@@ -94,8 +76,6 @@
 	-moz-perspective-origin-y: 50%;
 	perspective: 1200px;
 }
-
-/* fade */
 .owl-fade-out {
 	z-index: 10;
 	-webkit-animation: fadeOut .7s both ease;
@@ -107,8 +87,6 @@
 	-moz-animation: fadeIn .7s both ease;
 	animation: fadeIn .7s both ease;
 }
-
-/* backSlide */
 .owl-backSlide-out {
 	-webkit-animation: backSlideOut 1s both ease;
 	-moz-animation: backSlideOut 1s both ease;
@@ -119,8 +97,6 @@
 	-moz-animation: backSlideIn 1s both ease;
 	animation: backSlideIn 1s both ease;
 }
-
-/* goDown */
 .owl-goDown-out {
 	-webkit-animation: scaleToFade .7s ease both;
 	-moz-animation: scaleToFade .7s ease both;
@@ -131,8 +107,6 @@
 	-moz-animation: goDown .6s ease both;
 	animation: goDown .6s ease both;
 }
-
-/* scaleUp */
 .owl-fadeUp-in {
 	-webkit-animation: scaleUpFrom .5s ease both;
 	-moz-animation: scaleUpFrom .5s ease both;
@@ -143,10 +117,6 @@
 	-moz-animation: scaleUpTo .5s ease both;
 	animation: scaleUpTo .5s ease both;
 }
-
-/* Keyframes */
-
-/*empty*/
 @-webkit-keyframes empty {
 	0% {
 		opacity: 1;
@@ -363,11 +333,6 @@
 		transform: scale(1.5);
 	}
 }
-
-
-/* 
- *  02. Magnific Popup CSS
- */
 .mfp-bg {
 	top: 0;
 	left: 0;
@@ -624,8 +589,6 @@ button::-moz-focus-inner {
 	box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
 	background: #000;
 }
-
-/* Main image in popup */
 img.mfp-img {
 	width: auto;
 	max-width: 100%;
@@ -638,8 +601,6 @@ img.mfp-img {
 	padding: 40px 0 40px;
 	margin: 0 auto;
 }
-
-/* The shadow behind the image */
 .mfp-figure {
 	line-height: 0;
 }
@@ -688,10 +649,6 @@ img.mfp-img {
 	cursor: pointer;
 }
 @media screen and (max-width:800px) and (orientation:landscape), screen and (max-height:300px) {
-
-	/**
-	     * Remove all paddings around the image on small screen
-	     */
 	.mfp-img-mobile .mfp-image-holder {
 		padding-left: 0;
 		padding-right: 0;
@@ -776,5 +733,3 @@ img.mfp-img {
 	right: 0;
 	padding-top: 0;
 }
-
-/*# sourceMappingURL=vendor.css.map */

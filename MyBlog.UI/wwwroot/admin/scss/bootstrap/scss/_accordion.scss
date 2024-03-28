@@ -1,6 +1,4 @@
 //
-// Base styles
-//
 
 .accordion-button {
   position: relative;
@@ -10,7 +8,7 @@
   padding: $accordion-button-padding-y $accordion-button-padding-x;
   @include font-size($font-size-base);
   color: $accordion-button-color;
-  text-align: left; // Reset button style
+  text-align: left;
   background-color: $accordion-button-bg;
   border: 0;
   @include border-radius(0);
@@ -27,8 +25,6 @@
       transform: $accordion-icon-transform;
     }
   }
-
-  // Accordion icon
   &::after {
     flex-shrink: 0;
     width: $accordion-icon-width;
@@ -72,8 +68,6 @@
   &:not(:first-of-type) {
     border-top: 0;
   }
-
-  // Only set a border-radius on the last item if the accordion is collapsed
   &:last-of-type {
     @include border-bottom-radius($accordion-border-radius);
 
@@ -92,11 +86,6 @@
 .accordion-body {
   padding: $accordion-body-padding-y $accordion-body-padding-x;
 }
-
-
-// Flush accordion items
-//
-// Remove borders and border-radius to keep accordion items edge-to-edge.
 
 .accordion-flush {
   .accordion-collapse {

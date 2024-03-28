@@ -8,11 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    // Diðer kimlik doðrulama ayarlarýný burada yapabilirsiniz.
 }).AddCookie(options =>
 {
     options.LoginPath = "/Login";
-    // Diðer cookie ayarlarýný burada yapabilirsiniz.
 });
 
 builder.Services.AddControllersWithViews();
@@ -24,11 +22,9 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 builder.Services.AddHttpClient();
-builder.Services.AddAuthorization(); // Yetkilendirme servisini ekleyin
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
-
-// HTTP request pipeline'ýný yapýlandýrýn
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -52,14 +48,14 @@ app.Use(async (context, next) =>
     }
 });
 app.UseStaticFiles();
-app.UseRouting(); // Routing middleware'ini ekleyin
+app.UseRouting();
 
-app.UseAuthentication(); // Yetkilendirme middleware'ini ekleyin
-app.UseAuthorization(); // Yetkilendirme middleware'ini ekleyin (UseAuthentication'dan sonra olmalýdýr)
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseSession();
-app.UseMiddleware<LoginCheckMiddleware>(); // Özel yetkilendirme middleware'ini ekleyin
-app.UseMiddleware<SessionMiddleware>(); // Özel yetkilendirme middleware'ini ekleyin
+app.UseMiddleware<LoginCheckMiddleware>();
+app.UseMiddleware<SessionMiddleware>();
 
 app.UseEndpoints(endpoints =>
 {

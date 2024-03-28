@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 namespace MyBlog.UI.Middleware
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class LoginCheckMiddleware
     {
         private readonly RequestDelegate _next;
@@ -29,8 +28,6 @@ namespace MyBlog.UI.Middleware
 
         }
     }
-
-    // Extension method used to add the middleware to the HTTP request pipeline.
     public static class LoginCheckMiddlewareExtensions
     {
         public static IApplicationBuilder UseSessionCheckMiddleware(this IApplicationBuilder builder)

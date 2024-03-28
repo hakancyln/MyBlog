@@ -36,10 +36,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-// ReSharper disable once InconsistentNaming
 var DateTimePicker = function ($, moment) {
-    // ReSharper disable InconsistentNaming
     var NAME = 'datetimepicker',
         DATA_KEY = '' + NAME,
         EVENT_KEY = '.' + DATA_KEY,
@@ -57,7 +54,6 @@ var DateTimePicker = function ($, moment) {
         KEYDOWN: 'keydown' + EVENT_KEY,
         FOCUS: 'focus' + EVENT_KEY,
         CLICK_DATA_API: 'click' + EVENT_KEY + DATA_API_KEY,
-        //emitted
         UPDATE: 'update' + EVENT_KEY,
         ERROR: 'error' + EVENT_KEY,
         HIDE: 'hide' + EVENT_KEY,
@@ -326,14 +322,7 @@ var DateTimePicker = function ($, moment) {
         multidateSeparator: ','
     };
 
-    // ReSharper restore InconsistentNaming
-
-    // ReSharper disable once DeclarationHides
-    // ReSharper disable once InconsistentNaming
-
     var DateTimePicker = function () {
-        /** @namespace eData.dateOptions */
-        /** @namespace moment.tz */
 
         function DateTimePicker(element, options) {
             _classCallCheck(this, DateTimePicker);
@@ -354,13 +343,6 @@ var DateTimePicker = function ($, moment) {
 
             this._int();
         }
-
-        /**
-         * @return {string}
-         */
-
-
-        //private
 
         DateTimePicker.prototype._int = function _int() {
             var targetInput = this._element.data('target-input');
@@ -405,7 +387,6 @@ var DateTimePicker = function ($, moment) {
         DateTimePicker.prototype._setValue = function _setValue(targetMoment, index) {
             var oldDate = this.unset ? null : this._dates[index];
             var outpValue = '';
-            // case of calling setValue(null or false)
             if (!targetMoment) {
                 if (!this._options.allowMultidate || this._dates.length === 1) {
                     this.unset = true;
@@ -495,8 +476,6 @@ var DateTimePicker = function ($, moment) {
             return false;
         };
 
-        //noinspection JSMethodCanBeStatic
-
 
         DateTimePicker.prototype._getOptions = function _getOptions(options) {
             options = $.extend(true, {}, Default, options);
@@ -550,7 +529,7 @@ var DateTimePicker = function ($, moment) {
             }
 
             $.each(this._options, function (key) {
-                var attributeName = 'date' + key.charAt(0).toUpperCase() + key.slice(1); //todo data api key
+                var attributeName = 'date' + key.charAt(0).toUpperCase() + key.slice(1);
                 if (eData[attributeName] !== undefined) {
                     dataOptions[key] = eData[attributeName];
                 } else {
@@ -652,7 +631,6 @@ var DateTimePicker = function ($, moment) {
             } else {
                 inputDate = this._options.parseInputDate(inputDate);
             }
-            //inputDate.locale(this.options.locale);
             return inputDate;
         };
 
@@ -705,8 +683,6 @@ var DateTimePicker = function ($, moment) {
             }
         };
 
-        //noinspection JSMethodCanBeStatic,SpellCheckingInspection
-
 
         DateTimePicker.prototype._keyup = function _keyup(e) {
             keyState[e.which] = 'r';
@@ -718,9 +694,6 @@ var DateTimePicker = function ($, moment) {
         };
 
         DateTimePicker.prototype._indexGivenDates = function _indexGivenDates(givenDatesArray) {
-            // Store given enabledDates and disabledDates as keys.
-            // This way we can check their existence in O(1) time instead of looping through whole array.
-            // (for example: options.enabledDates['2014-02-27'] === true)
             var givenDatesIndexed = {},
                 self = this;
             $.each(givenDatesArray, function () {
@@ -733,9 +706,6 @@ var DateTimePicker = function ($, moment) {
         };
 
         DateTimePicker.prototype._indexGivenHours = function _indexGivenHours(givenHoursArray) {
-            // Store given enabledHours and disabledHours as keys.
-            // This way we can check their existence in O(1) time instead of looping through whole array.
-            // (for example: options.enabledHours['2014-02-27'] === true)
             var givenHoursIndexed = {};
             $.each(givenHoursArray, function () {
                 givenHoursIndexed[this] = true;
@@ -748,7 +718,7 @@ var DateTimePicker = function ($, moment) {
                 self = this;
 
             this.actualFormat = format.replace(/(\[[^\[]*])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (formatInput) {
-                return self._dates[0].localeData().longDateFormat(formatInput) || formatInput; //todo taking the first date should be ok
+                return self._dates[0].localeData().longDateFormat(formatInput) || formatInput;
             });
 
             this.parseFormats = this._options.extraFormats ? this._options.extraFormats.slice() : [];
@@ -783,17 +753,13 @@ var DateTimePicker = function ($, moment) {
             return this._dates.length - 1;
         };
 
-        //public
-
 
         DateTimePicker.prototype.getMoment = function getMoment(d) {
             var returnMoment = void 0;
 
             if (d === undefined || d === null) {
-                returnMoment = moment(); //TODO should this use format? and locale?
+                returnMoment = moment();
             } else if (this._hasTimeZone()) {
-                // There is a string to parse and a default time zone
-                // parse with the tz function which takes a default time zone if it is not in the format string
                 returnMoment = moment.tz(d, this.parseFormats, this._options.locale, this._options.useStrict, this._options.timeZone);
             } else {
                 returnMoment = moment(d, this.parseFormats, this._options.locale, this._options.useStrict);
@@ -868,7 +834,7 @@ var DateTimePicker = function ($, moment) {
 
             this._options.format = newFormat;
             if (this.actualFormat) {
-                this._initFormatting(); // reinitialize formatting
+                this._initFormatting();
             }
         };
 
@@ -907,7 +873,7 @@ var DateTimePicker = function ($, moment) {
 
             this._options.extraFormats = formats;
             if (this.parseFormats) {
-                this._initFormatting(); // reinit formatting
+                this._initFormatting();
             }
         };
 
@@ -1110,7 +1076,7 @@ var DateTimePicker = function ($, moment) {
             this._viewDate.locale(this._options.locale);
 
             if (this.actualFormat) {
-                this._initFormatting(); // reinitialize formatting
+                this._initFormatting();
             }
             if (this.widget) {
                 this.hide();
@@ -1317,7 +1283,7 @@ var DateTimePicker = function ($, moment) {
         };
 
         DateTimePicker.prototype.clear = function clear() {
-            this._setValue(null); //todo
+            this._setValue(null);
         };
 
         DateTimePicker.prototype.keyBinds = function keyBinds(_keyBinds) {
@@ -1506,29 +1472,17 @@ var DateTimePicker = function ($, moment) {
                 return NAME;
             }
 
-            /**
-             * @return {string}
-             */
-
         }, {
             key: 'DATA_KEY',
             get: function get() {
                 return DATA_KEY;
             }
 
-            /**
-             * @return {string}
-             */
-
         }, {
             key: 'EVENT_KEY',
             get: function get() {
                 return EVENT_KEY;
             }
-
-            /**
-             * @return {string}
-             */
 
         }, {
             key: 'DATA_API_KEY',
@@ -1575,12 +1529,7 @@ var DateTimePicker = function ($, moment) {
 
     return DateTimePicker;
 }(jQuery, moment);
-
-//noinspection JSUnusedGlobalSymbols
-/* global DateTimePicker */
 var TempusDominusBootstrap4 = function ($) {
-    // eslint-disable-line no-unused-vars
-    // ReSharper disable once InconsistentNaming
     var JQUERY_NO_CONFLICT = $.fn[DateTimePicker.NAME],
         verticalModes = ['top', 'bottom', 'auto'],
         horizontalModes = ['left', 'right', 'auto'],
@@ -1604,8 +1553,6 @@ var TempusDominusBootstrap4 = function ($) {
 
         return $selector;
     };
-
-    // ReSharper disable once InconsistentNaming
 
     var TempusDominusBootstrap4 = function (_DateTimePicker) {
         _inherits(TempusDominusBootstrap4, _DateTimePicker);
@@ -1845,18 +1792,13 @@ var TempusDominusBootstrap4 = function ($) {
                 parent = self._element;
                 self._element.children().first().after(self.widget);
             }
-
-            // Top and bottom logic
             if (vertical === 'auto') {
-                //noinspection JSValidateTypes
                 if (offset.top + self.widget.height() * 1.5 >= $(window).height() + $(window).scrollTop() && self.widget.height() + self._element.outerHeight() < offset.top) {
                     vertical = 'top';
                 } else {
                     vertical = 'bottom';
                 }
             }
-
-            // Left and right logic
             if (horizontal === 'auto') {
                 if (parent.width() < offset.left + self.widget.outerWidth() / 2 && offset.left + self.widget.outerWidth() > $(window).width()) {
                     horizontal = 'right';
@@ -1876,8 +1818,6 @@ var TempusDominusBootstrap4 = function ($) {
             } else {
                 self.widget.removeClass('float-right');
             }
-
-            // find the first parent element that has a relative css positioning
             if (parent.css('position') !== 'relative') {
                 parent = parent.parents().filter(function () {
                     return $(this).css('position') === 'relative';
@@ -2071,7 +2011,6 @@ var TempusDominusBootstrap4 = function ($) {
             currentDate = this._viewDate.clone().startOf('M').startOf('w').startOf('d');
 
             for (i = 0; i < 42; i++) {
-                //always display 42 days (should show 6 weeks)
                 if (currentDate.weekday() === 0) {
                     row = $('<tr>');
                     if (this._options.calendarWeeks) {
@@ -2291,7 +2230,7 @@ var TempusDominusBootstrap4 = function ($) {
                         if (this._options.allowMultidate) {
                             index = this._datesFormatted.indexOf(selectDate.format('YYYY-MM-DD'));
                             if (index !== -1) {
-                                this._setValue(null, index); //deselect multidate
+                                this._setValue(null, index);
                             } else {
                                 this._setValue(selectDate, this._getLastPickedDateIndex() + 1);
                             }
@@ -2373,11 +2312,9 @@ var TempusDominusBootstrap4 = function ($) {
                                 return true;
                             }
                             if (expanded.collapse) {
-                                // if collapse plugin is available through bootstrap.js then use it
                                 expanded.collapse('hide');
                                 closed.collapse('show');
                             } else {
-                                // otherwise just toggle in class on the two views
                                 expanded.removeClass('show');
                                 closed.addClass('show');
                             }
@@ -2464,15 +2401,12 @@ var TempusDominusBootstrap4 = function ($) {
             return false;
         };
 
-        //public
-
 
         TempusDominusBootstrap4.prototype.hide = function hide() {
             var transitioning = false;
             if (!this.widget) {
                 return;
             }
-            // Ignore event if in the middle of a picker transition
             this.widget.find('.collapse').each(function () {
                 var collapseData = $(this).data('collapse');
                 if (collapseData && collapseData.transitioning) {
@@ -2562,7 +2496,7 @@ var TempusDominusBootstrap4 = function ($) {
             this._showMode();
 
             $(window).on('resize', { picker: this }, this._place);
-            this.widget.on('click', '[data-action]', $.proxy(this._doAction, this)); // this handles clicks on the widget
+            this.widget.on('click', '[data-action]', $.proxy(this._doAction, this));
             this.widget.on('mousedown', false);
 
             if (this.component && this.component.hasClass('btn')) {
@@ -2581,7 +2515,6 @@ var TempusDominusBootstrap4 = function ($) {
 
         TempusDominusBootstrap4.prototype.destroy = function destroy() {
             this.hide();
-            //todo doc off?
             this._element.removeData(DateTimePicker.DATA_KEY);
             this._element.removeData('date');
         };
@@ -2592,7 +2525,7 @@ var TempusDominusBootstrap4 = function ($) {
                 this.component.addClass('disabled');
             }
             if (this.input !== undefined) {
-                this.input.prop('disabled', true); //todo disable this/comp if input is null
+                this.input.prop('disabled', true);
             }
         };
 
@@ -2601,7 +2534,7 @@ var TempusDominusBootstrap4 = function ($) {
                 this.component.removeClass('disabled');
             }
             if (this.input !== undefined) {
-                this.input.prop('disabled', false); //todo enable comp/this if input is null
+                this.input.prop('disabled', false);
             }
         };
 
@@ -2675,8 +2608,6 @@ var TempusDominusBootstrap4 = function ($) {
             }
         };
 
-        //static
-
 
         TempusDominusBootstrap4._jQueryHandleThis = function _jQueryHandleThis(me, option, argument) {
             var data = $(me).data(DateTimePicker.DATA_KEY);
@@ -2712,12 +2643,6 @@ var TempusDominusBootstrap4 = function ($) {
 
         return TempusDominusBootstrap4;
     }(DateTimePicker);
-
-    /**
-    * ------------------------------------------------------------------------
-    * jQuery
-    * ------------------------------------------------------------------------
-    */
 
 
     $(document).on(DateTimePicker.Event.CLICK_DATA_API, DateTimePicker.Selector.DATA_TOGGLE, function () {

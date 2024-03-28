@@ -20,7 +20,6 @@ namespace MyBlog.UI.ViewComponents
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			//_httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
 			var responseMessage = await _httpClient.PostAsync("https://localhost:7200/About/GetOne/1", null);
 			var responseMessage2 = await _httpClient.PostAsync("https://localhost:7200/Skills/GetAll", null);
 
@@ -35,7 +34,6 @@ namespace MyBlog.UI.ViewComponents
 					About = value,
 					Skills = value2
 				};
-				//_httpClient.DefaultRequestHeaders.Remove("Authorization");
 				return View(model);
 			}
 
