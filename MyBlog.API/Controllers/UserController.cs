@@ -18,13 +18,6 @@ namespace MyBlog.API.Controllers
         {
             _service = service;
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //	var value = await _service.GetAllAsync();
-        //	return Ok(value);
-        //}
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> GetOne()
@@ -58,12 +51,5 @@ namespace MyBlog.API.Controllers
             value = await _service.UpdateUserAsync(data);
             return Ok(value);
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Remove(int id)
-        //{
-
-        //	var value = await _service.RemoveAsync(id);
-        //	return Ok(value);
-        //}
     }
 }

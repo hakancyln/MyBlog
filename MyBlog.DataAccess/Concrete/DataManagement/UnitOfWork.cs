@@ -20,12 +20,6 @@ namespace MyBlog.DataAccess.Concrete.DataManagement
 			_repositories = new Dictionary<Type, object>();
 			_context = context;
 		}
-
-		/// <summary>
-		/// Bu UnitOfWork katmanında kayıtlı olan tüm repolar için tek seferde
-		/// db kayıt işlemini çalıştırır. Hata olursa buradan exception fırlatılır.
-		/// </summary>
-		/// <returns></returns>
 		public async Task<bool> SaveChangesAsync()
 		{
 			var result = false;
