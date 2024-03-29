@@ -10,10 +10,10 @@
     </div>
     <div class="row portfolio-content">
         <div class="col-twelve">
-            <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
+            <div id="folio-wrapper" class="block-1-2 block-mob-full stack folio-wrapper-h">
                 @foreach (var item in Model.Data)
                 {
-                    <div class="bgrid folio-item">
+                    <div class="bgrid folio-item" style="padding:20px;">
                         <div class="item-wrap">
                             <img src="images/portfolio/@item.Image" alt="Liberty">
                             <a href="#@item.Id" class="overlay">
@@ -26,7 +26,7 @@
                             </a>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button hidden type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Launch static backdrop modal
                     </button>
                     <div id="@item.Id" class="popup-modal slider mfp-hide">

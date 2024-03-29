@@ -30,6 +30,18 @@
 @import url("fonts.css");
 @import url("font-awesome/css/font-awesome.min.css");
 @import url("micons/micons.css");
+
+/*My Css Start*/
+
+.folio-wrapper-h {
+	background-color: #4240403d;
+	border-radius: 20px;
+}
+/*My Css End*/
+
+
+
+
 html {
 	font-size: 10px;
 	font-family: 'Times New Roman', Times, serif !important;
