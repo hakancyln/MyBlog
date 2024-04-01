@@ -33,7 +33,7 @@ namespace MyBlog.UI.ViewComponents
 				return View(model);
 			}
 
-			return null;
+			return View();
 		}
 	}
 }

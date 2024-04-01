@@ -818,7 +818,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	line-height: 2.4rem;
 }
 .skill-bars li .progress {
-	background: #313131;
+	background: darkred;
 	position: relative;
 	height: 100%;
 }
@@ -2044,14 +2044,14 @@ header .logo a {
 }
 #message-warning, #message-success {
 	display: none;
-	background: #0d0d0d;
+	background: white;
 	border-radius: 3px;
 	padding: 3rem;
 	margin-bottom: 3.6rem;
 	width: 100%;
 }
 #message-warning {
-	color: #fa0003;
+	color: darkred;
 }
 #message-success {
 	color: darkred;

@@ -27,6 +27,11 @@ namespace MyBlog.UI.Areas.Admin.Controllers
         {
 
             UIResponse<AboutGetDTO> data = await GetAsync<AboutGetDTO>(url + "About/GetOne/1");
+            if (data==null)
+            {
+                return View();
+
+            }
             return View(data);
 
         }

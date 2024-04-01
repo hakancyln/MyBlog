@@ -38,8 +38,17 @@
                             <p>@Html.Raw(@item.Description)</p>
                         </div>
                         <div class="link-box">
-                            <a href="@item.Url" target="_blank">Detay</a>
-                            <a class="popup-modal-dismiss">Kapat</a>
+                            @if(item.Url == "#")
+                            {
+                                <a>Detay</a>
+                                <a class="popup-modal-dismiss">Kapat</a>
+                            }
+                            else
+                            {
+                                <a href="@item.Url" target="_blank">Detay</a>
+                                <a class="popup-modal-dismiss">Kapat</a>
+                            }
+                            
                         </div>
                     </div> 
                 }
