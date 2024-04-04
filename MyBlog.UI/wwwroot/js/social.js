@@ -28,7 +28,7 @@ $("#update").click(function (e) {
     e.preventDefault();
 
     var formValid = true;
-    $("form input[required], form textarea[required]").each(function () {
+    $("form input[socialrequired], form textarea[socialrequired]").each(function () {
         if (!$(this).val()) {
             formValid = false;
             $(this).addClass("is-invalid");

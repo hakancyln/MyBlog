@@ -49,14 +49,15 @@ namespace MyBlog.UI.Areas.Admin.Controllers
         [HttpPost("/LogUpdate")]
         public async Task<IActionResult> LogUpdate(UserCrudDTO p)
         {
+            _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Session.GetString("Token"));
             var jsonData = JsonConvert.SerializeObject(p);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await _httpClient.PostAsync("https://localhost:7200/User/AddOrUpdate", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 await HttpContext.SignOutAsync();
+                _httpClient.DefaultRequestHeaders.Remove("Authorization");
                 return Json(new { success = true, redirectUrl = Url.Action("Login", "Home") });
-
             }
             return Json(new { success = false, responseText = "Kullanıcı Adı yada şifre yanlış." });
 

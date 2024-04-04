@@ -253,7 +253,7 @@
                     contentType: false,
                     success: function (response) {
                         if (response.success) {
-                            location.reload();
+                            window.location.href = '/girisyap';
                         } else {
                             Swal.fire({
                                 title: "Hata!",
